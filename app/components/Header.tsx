@@ -13,7 +13,12 @@ export function Header() {
     <div className="sticky top-0 left-0 z-1000 md:relative">
       <div className="relative z-100 bg-white">
         <div className="container flex items-center justify-between py-6">
-          <div>logo</div>
+          <Link
+            to="/"
+            className="w-fit"
+          >
+            logo
+          </Link>
           <nav className="hidden items-center gap-5 md:flex">
             <Link to="#">
               <TextUpAnimation text="About" />
@@ -28,10 +33,10 @@ export function Header() {
               <TextUpAnimation text="Blog" />
             </Link>
             <Link
-              to="#"
+              to="/find"
               className="group flex items-center gap-2 rounded-full bg-teal-500 px-4 py-2 text-white transition hover:bg-teal-400"
             >
-              <span>Contact Us</span>
+              <span>Go to FindDoc</span>
               <ArrowRight
                 size={16}
                 className="transition group-hover:translate-x-0.75"
@@ -63,10 +68,10 @@ export function Header() {
         <Link to="#">Doctors</Link>
         <Link to="#">Blog</Link>
         <Link
-          to="#"
+          to="/find"
           className="group flex items-center gap-2 rounded-full bg-teal-600 px-4 py-2 text-white transition hover:bg-teal-500"
         >
-          <span>Contact Us</span>
+          <span>Go to FindDoc</span>
           <ArrowRight
             size={16}
             className="transition group-hover:translate-x-0.75"

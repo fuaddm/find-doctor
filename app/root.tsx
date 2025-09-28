@@ -4,6 +4,7 @@ import type { Route } from './+types/root';
 import './app.css';
 import { Header } from '~/components/Header';
 import { Footer } from '~/components/Footer';
+import { Toaster } from 'react-hot-toast';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -34,6 +35,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Header />
         {children}
         <Footer />
+        <Toaster />
         <ScrollRestoration />
         <Scripts />
       </body>

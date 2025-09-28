@@ -78,10 +78,10 @@ export function Intro() {
           </div>
           <div className="mb-8 flex items-center gap-2">
             <Link
-              to="#"
+              to="/find"
               className="group flex items-center gap-2 rounded-full bg-teal-600 px-4 py-2 text-white transition hover:bg-teal-500"
             >
-              <span>Contact Us</span>
+              <span>Go to FindDoc</span>
               <ArrowRight
                 size={16}
                 className="transition group-hover:translate-x-0.75"

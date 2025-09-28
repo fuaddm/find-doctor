@@ -5,7 +5,12 @@ export function Footer() {
   return (
     <div className="container flex flex-wrap justify-between gap-20 py-10">
       <div className="flex max-w-[400px] flex-col gap-5">
-        <div>logo</div>
+        <Link
+          to="/"
+          className="w-fit"
+        >
+          logo
+        </Link>
         <div className="text-xl font-medium text-gray-500">
           Stay up to date on the latest features and releases by joining our socials
         </div>
