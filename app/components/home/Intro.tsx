@@ -124,13 +124,13 @@ export function Intro() {
         <div className="flex md:justify-end">
           <Link
             to="#"
-            className="group/card relative block"
+            className="group/card relative block aspect-[1/1.2] w-full max-w-[420px]"
           >
             <div className="absolute top-0 left-0 z-0 h-full w-full -translate-x-8 translate-y-4 -rotate-4 rounded-3xl bg-gradient-to-b from-gray-100 to-transparent"></div>
-            <div className="relative z-10 block aspect-[1/1.2] h-full w-full max-w-[450px] overflow-hidden rounded-3xl border-5 border-white bg-gray-400">
+            <div className="relative z-10 block aspect-[1/1.2] w-full overflow-hidden rounded-3xl border-5 border-white bg-gray-400">
               <img
                 src={doctorPic}
-                width={450}
+                width={420}
                 className="h-full w-full object-cover"
                 alt=""
               />
