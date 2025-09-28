@@ -1,0 +1,18 @@
+import { Header } from '~/components/Header';
+import type { Route } from './+types/home';
+import { Intro } from '~/components/Intro';
+import { Footer } from '~/components/Footer';
+
+export function meta({}: Route.MetaArgs) {
+  return [{ title: 'New React Router App' }, { name: 'description', content: 'Welcome to React Router!' }];
+}
+
+export default function Home() {
+  return (
+    <div>
+      <Header />
+      <Intro />
+      <Footer />
+    </div>
+  );
+}

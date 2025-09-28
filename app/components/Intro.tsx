@@ -1,0 +1,162 @@
+import { ArrowRight, ArrowUpRight, Plus, Star, UsersRound, UserStar } from 'lucide-react';
+import { Link } from 'react-router';
+import reviewPic1 from '~/assets/review-1.webp';
+import reviewPic2 from '~/assets/review-2.webp';
+import reviewPic3 from '~/assets/review-3.webp';
+import reviewPic4 from '~/assets/review-4.webp';
+import doctorPic from '~/assets/doctor.webp';
+
+export function Intro() {
+  return (
+    <div className="container pt-10 pb-10 md:pt-2">
+      <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center md:gap-20">
+        <div>
+          <div className="mb-6 flex items-center gap-3">
+            <div className="relative w-[calc((32px*2/3)*4+32px)]">
+              <div className="relative z-0 h-8 w-8 overflow-hidden rounded-full border-2 border-white bg-gray-400 outline-1 outline-black/10">
+                <img
+                  src={reviewPic1}
+                  alt=""
+                />
+              </div>
+              <div className="absolute top-0 left-0 z-10 h-8 w-8 translate-x-2/3 overflow-hidden rounded-full border-2 border-white bg-gray-400 outline-1 outline-black/10">
+                <img
+                  src={reviewPic2}
+                  alt=""
+                />
+              </div>
+              <div className="absolute top-0 left-0 z-10 h-8 w-8 translate-x-[calc(66%*2)] overflow-hidden rounded-full border-2 border-white bg-gray-400 outline-1 outline-black/10">
+                <img
+                  src={reviewPic3}
+                  alt=""
+                />
+              </div>
+              <div className="absolute top-0 left-0 z-10 h-8 w-8 translate-x-[calc(66%*3)] overflow-hidden rounded-full border-2 border-white bg-gray-400 outline-1 outline-black/10">
+                <img
+                  src={reviewPic4}
+                  alt=""
+                />
+              </div>
+              <div className="absolute top-0 left-0 z-10 grid h-8 w-8 translate-x-[calc(66%*4)] place-items-center overflow-hidden rounded-full border-2 border-teal-700 bg-teal-700 outline-1 outline-teal-700">
+                <Plus
+                  size={20}
+                  className="stroke-white"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col gap-1">
+              <div className="flex gap-0.5">
+                <Star
+                  size={14}
+                  className="fill-orange-400 stroke-orange-400"
+                />
+                <Star
+                  size={14}
+                  className="fill-orange-400 stroke-orange-400"
+                />
+                <Star
+                  size={14}
+                  className="fill-orange-400 stroke-orange-400"
+                />
+                <Star
+                  size={14}
+                  className="fill-orange-400 stroke-orange-400"
+                />
+                <Star
+                  size={14}
+                  className="fill-orange-400 stroke-orange-400"
+                />
+              </div>
+              <div className="text-sm font-medium">Based on 20K+ Reviews</div>
+            </div>
+          </div>
+          <h1 className="mb-6 text-[54px] leading-16 font-medium tracking-tight">
+            Search any doctors & plan your next visit
+          </h1>
+          <div className="mb-6 font-medium text-gray-500">
+            Experience leading healthcare services with expert treatments tailored to your work needs
+          </div>
+          <div className="mb-8 flex items-center gap-2">
+            <Link
+              to="#"
+              className="group flex items-center gap-2 rounded-full bg-teal-600 px-4 py-2 text-white transition hover:bg-teal-500"
+            >
+              <span>Contact Us</span>
+              <ArrowRight
+                size={16}
+                className="transition group-hover:translate-x-0.75"
+              />
+            </Link>
+            <Link
+              to="#"
+              className="group flex items-center gap-2 rounded-full px-4 py-2 font-medium transition"
+            >
+              <span>What we do</span>
+              <ArrowUpRight
+                size={16}
+                className="transition group-hover:translate-x-0.75 group-hover:-translate-y-0.75"
+              />
+            </Link>
+          </div>
+          <div className="flex gap-8">
+            <div className="flex items-center gap-4">
+              <UsersRound
+                size={32}
+                className="stroke-teal-800"
+              />
+              <div className="flex flex-col gap-1">
+                <div className="text-lg font-medium">Support</div>
+                <div className="text-xs font-medium text-gray-500">24/7 care access</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <UserStar
+                size={32}
+                className="stroke-teal-800"
+              />
+              <div className="flex flex-col gap-1">
+                <div className="text-lg font-medium">Rating</div>
+                <div className="text-xs font-medium text-gray-500">Rated 5 stars by users</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex md:justify-end">
+          <Link
+            to="#"
+            className="group/card relative block"
+          >
+            <div className="absolute top-0 left-0 z-0 h-full w-full -translate-x-8 translate-y-4 -rotate-4 rounded-3xl bg-gradient-to-b from-gray-100 to-transparent"></div>
+            <div className="relative z-10 block aspect-[1/1.2] h-full w-full max-w-[450px] overflow-hidden rounded-3xl border-5 border-white bg-gray-400">
+              <img
+                src={doctorPic}
+                width={450}
+                className="h-full w-full object-cover"
+                alt=""
+              />
+              <div className="absolute bottom-0 left-0 flex w-full items-center justify-between px-6 pt-12 pb-5">
+                <div className="absolute top-0 left-0 z-10 h-full w-full backdrop-blur-[12px] [mask:linear-gradient(transparent,var(--color-teal-800),var(--color-teal-800))]"></div>
+                <div className="relative z-20">
+                  <div className="mb-0.5 font-medium text-white">Psychologist</div>
+                  <div className="text-2xl font-medium text-white">John Watson</div>
+                </div>
+                <div className="relative z-20 overflow-hidden rounded-full bg-teal-600 p-2 transition group-hover/card:bg-teal-500">
+                  <ArrowUpRight
+                    size={15}
+                    className="stroke-white transition group-hover/card:translate-x-full group-hover/card:-translate-y-full"
+                  />
+                  <div className="absolute top-0 left-0 grid h-full w-full -translate-x-full translate-y-full place-items-center transition group-hover/card:translate-0">
+                    <ArrowUpRight
+                      size={15}
+                      className="stroke-white"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
