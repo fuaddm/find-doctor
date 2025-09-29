@@ -1,19 +1,11 @@
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '~/components/ui/select';
-
-import { Check, ChevronsUpDown } from 'lucide-react';
+import { Check, ChevronsUpDown, Star } from 'lucide-react';
 import { cn } from '~/lib/utils';
 import { Button } from '~/components/ui/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '~/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
 import { useState } from 'react';
+import { Input } from 'react-aria-components';
+import { MyInput } from '~/components/ui/input';
 
 const JOB_OPTIONS = [
   { value: 'general_practitioner', label: 'General Practitioner' },
@@ -80,8 +72,11 @@ export function Filter() {
   const [open2, setOpen2] = useState(false);
   const [genderValue, setGender] = useState('');
 
+  const [open3, setOpen3] = useState(false);
+  const [ratingValue, setRating] = useState('');
+
   return (
-    <div className="flex gap-3">
+    <div className="mb-10 flex gap-3">
       <Popover
         open={open}
         onOpenChange={setOpen}
@@ -170,6 +165,153 @@ export function Filter() {
           </Command>
         </PopoverContent>
       </Popover>
+      <Popover
+        open={open3}
+        onOpenChange={setOpen3}
+      >
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={open3}
+            className="w-[250px] justify-between"
+          >
+            {ratingValue ? (
+              <div className="flex items-center gap-1">
+                <Star
+                  className={cn({
+                    'stroke-orange-400': true,
+                    'fill-orange-400': Number(ratingValue) >= 1,
+                  })}
+                />
+                <Star
+                  className={cn({
+                    'stroke-orange-400': true,
+                    'fill-orange-400': Number(ratingValue) >= 2,
+                  })}
+                />
+                <Star
+                  className={cn({
+                    'stroke-orange-400': true,
+                    'fill-orange-400': Number(ratingValue) >= 3,
+                  })}
+                />
+                <Star
+                  className={cn({
+                    'stroke-orange-400': true,
+                    'fill-orange-400': Number(ratingValue) >= 4,
+                  })}
+                />
+                <Star
+                  className={cn({
+                    'stroke-orange-400': true,
+                    'fill-orange-400': Number(ratingValue) >= 5,
+                  })}
+                />
+              </div>
+            ) : (
+              'Select rating...'
+            )}
+            <ChevronsUpDown className="opacity-50" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent
+          side="bottom"
+          avoidCollisions={false}
+          className="w-[250px] p-0"
+        >
+          <Command>
+            <CommandList>
+              <CommandGroup>
+                <CommandItem
+                  value="5"
+                  onSelect={(currentValue) => {
+                    setRating(currentValue === ratingValue ? '' : currentValue);
+                    setOpen3(false);
+                  }}
+                >
+                  <div className="flex items-center gap-1">
+                    <Star className="fill-orange-400 stroke-orange-400" />
+                    <Star className="fill-orange-400 stroke-orange-400" />
+                    <Star className="fill-orange-400 stroke-orange-400" />
+                    <Star className="fill-orange-400 stroke-orange-400" />
+                    <Star className="fill-orange-400 stroke-orange-400" />
+                  </div>
+                  <Check className={cn('ml-auto', ratingValue === '5' ? 'opacity-100' : 'opacity-0')} />
+                </CommandItem>
+                <CommandItem
+                  value="4"
+                  onSelect={(currentValue) => {
+                    setRating(currentValue === ratingValue ? '' : currentValue);
+                    setOpen3(false);
+                  }}
+                >
+                  <div className="flex items-center gap-1">
+                    <Star className="fill-orange-400 stroke-orange-400" />
+                    <Star className="fill-orange-400 stroke-orange-400" />
+                    <Star className="fill-orange-400 stroke-orange-400" />
+                    <Star className="fill-orange-400 stroke-orange-400" />
+                    <Star className="stroke-orange-400" />
+                  </div>
+                  <Check className={cn('ml-auto', ratingValue === '4' ? 'opacity-100' : 'opacity-0')} />
+                </CommandItem>
+                <CommandItem
+                  value="3"
+                  onSelect={(currentValue) => {
+                    setRating(currentValue === ratingValue ? '' : currentValue);
+                    setOpen3(false);
+                  }}
+                >
+                  <div className="flex items-center gap-1">
+                    <Star className="fill-orange-400 stroke-orange-400" />
+                    <Star className="fill-orange-400 stroke-orange-400" />
+                    <Star className="fill-orange-400 stroke-orange-400" />
+                    <Star className="stroke-orange-400" />
+                    <Star className="stroke-orange-400" />
+                  </div>
+                  <Check className={cn('ml-auto', ratingValue === '3' ? 'opacity-100' : 'opacity-0')} />
+                </CommandItem>
+                <CommandItem
+                  value="2"
+                  onSelect={(currentValue) => {
+                    setRating(currentValue === ratingValue ? '' : currentValue);
+                    setOpen3(false);
+                  }}
+                >
+                  <div className="flex items-center gap-1">
+                    <Star className="fill-orange-400 stroke-orange-400" />
+                    <Star className="fill-orange-400 stroke-orange-400" />
+                    <Star className="stroke-orange-400" />
+                    <Star className="stroke-orange-400" />
+                    <Star className="stroke-orange-400" />
+                  </div>
+                  <Check className={cn('ml-auto', ratingValue === '2' ? 'opacity-100' : 'opacity-0')} />
+                </CommandItem>
+                <CommandItem
+                  value="1"
+                  onSelect={(currentValue) => {
+                    setRating(currentValue === ratingValue ? '' : currentValue);
+                    setOpen3(false);
+                  }}
+                >
+                  <div className="flex items-center gap-1">
+                    <Star className="fill-orange-400 stroke-orange-400" />
+                    <Star className="stroke-orange-400" />
+                    <Star className="stroke-orange-400" />
+                    <Star className="stroke-orange-400" />
+                    <Star className="stroke-orange-400" />
+                  </div>
+                  <Check className={cn('ml-auto', ratingValue === '1' ? 'opacity-100' : 'opacity-0')} />
+                </CommandItem>
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </PopoverContent>
+      </Popover>
+      <div className="flex gap-2">
+        <MyInput placeholder="Min. price" />
+        <MyInput placeholder="Max. price" />
+      </div>
     </div>
   );
 }
