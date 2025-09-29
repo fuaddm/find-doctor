@@ -6,6 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover
 import { useState } from 'react';
 import { Input } from 'react-aria-components';
 import { MyInput } from '~/components/ui/input';
+import { useSearchParams } from 'react-router';
 
 const JOB_OPTIONS = [
   { value: 'general_practitioner', label: 'General Practitioner' },
@@ -66,6 +67,8 @@ const GENDERS = [
 ];
 
 export function Filter() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [open, setOpen] = useState(false);
   const [jobValue, setJob] = useState('');
 
@@ -111,53 +114,18 @@ export function Filter() {
                     value={job.value}
                     onSelect={(currentValue) => {
                       setJob(currentValue === jobValue ? '' : currentValue);
+                      setSearchParams((searchParams) => {
+                        if (jobValue !== currentValue) searchParams.set('job', currentValue);
+                        else searchParams.delete('job');
+
+                        return searchParams;
+                      });
+
                       setOpen(false);
                     }}
                   >
                     {job.label}
                     <Check className={cn('ml-auto', jobValue === job.value ? 'opacity-100' : 'opacity-0')} />
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </PopoverContent>
-      </Popover>
-      <Popover
-        open={open2}
-        onOpenChange={setOpen2}
-      >
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            role="combobox"
-            aria-expanded={open2}
-            className="w-[200px] justify-between"
-          >
-            {genderValue ? GENDERS.find((gender) => gender.value === genderValue)?.label : 'Select gender...'}
-            <ChevronsUpDown className="opacity-50" />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent
-          side="bottom"
-          avoidCollisions={false}
-          className="w-[200px] p-0"
-        >
-          <Command>
-            <CommandList>
-              <CommandEmpty>No gender found.</CommandEmpty>
-              <CommandGroup>
-                {GENDERS.map((gender) => (
-                  <CommandItem
-                    key={gender.value}
-                    value={gender.value}
-                    onSelect={(currentValue) => {
-                      setGender(currentValue === genderValue ? '' : currentValue);
-                      setOpen2(false);
-                    }}
-                  >
-                    {gender.label}
-                    <Check className={cn('ml-auto', genderValue === gender.value ? 'opacity-100' : 'opacity-0')} />
                   </CommandItem>
                 ))}
               </CommandGroup>
@@ -227,6 +195,12 @@ export function Filter() {
                   value="5"
                   onSelect={(currentValue) => {
                     setRating(currentValue === ratingValue ? '' : currentValue);
+                    setSearchParams((searchParams) => {
+                      if (ratingValue !== currentValue) searchParams.set('rating', currentValue);
+                      else searchParams.delete('rating');
+
+                      return searchParams;
+                    });
                     setOpen3(false);
                   }}
                 >
@@ -243,6 +217,12 @@ export function Filter() {
                   value="4"
                   onSelect={(currentValue) => {
                     setRating(currentValue === ratingValue ? '' : currentValue);
+                    setSearchParams((searchParams) => {
+                      if (ratingValue !== currentValue) searchParams.set('rating', currentValue);
+                      else searchParams.delete('rating');
+
+                      return searchParams;
+                    });
                     setOpen3(false);
                   }}
                 >
@@ -259,6 +239,12 @@ export function Filter() {
                   value="3"
                   onSelect={(currentValue) => {
                     setRating(currentValue === ratingValue ? '' : currentValue);
+                    setSearchParams((searchParams) => {
+                      if (ratingValue !== currentValue) searchParams.set('rating', currentValue);
+                      else searchParams.delete('rating');
+
+                      return searchParams;
+                    });
                     setOpen3(false);
                   }}
                 >
@@ -275,6 +261,12 @@ export function Filter() {
                   value="2"
                   onSelect={(currentValue) => {
                     setRating(currentValue === ratingValue ? '' : currentValue);
+                    setSearchParams((searchParams) => {
+                      if (ratingValue !== currentValue) searchParams.set('rating', currentValue);
+                      else searchParams.delete('rating');
+
+                      return searchParams;
+                    });
                     setOpen3(false);
                   }}
                 >
@@ -291,6 +283,12 @@ export function Filter() {
                   value="1"
                   onSelect={(currentValue) => {
                     setRating(currentValue === ratingValue ? '' : currentValue);
+                    setSearchParams((searchParams) => {
+                      if (ratingValue !== currentValue) searchParams.set('rating', currentValue);
+                      else searchParams.delete('rating');
+
+                      return searchParams;
+                    });
                     setOpen3(false);
                   }}
                 >
@@ -308,9 +306,64 @@ export function Filter() {
           </Command>
         </PopoverContent>
       </Popover>
+      <Popover
+        open={open2}
+        onOpenChange={setOpen2}
+      >
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={open2}
+            className="w-[200px] justify-between"
+          >
+            {genderValue ? GENDERS.find((gender) => gender.value === genderValue)?.label : 'Select gender...'}
+            <ChevronsUpDown className="opacity-50" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent
+          side="bottom"
+          avoidCollisions={false}
+          className="w-[200px] p-0"
+        >
+          <Command>
+            <CommandList>
+              <CommandEmpty>No gender found.</CommandEmpty>
+              <CommandGroup>
+                {GENDERS.map((gender) => (
+                  <CommandItem
+                    key={gender.value}
+                    value={gender.value}
+                    onSelect={(currentValue) => {
+                      setGender(currentValue === genderValue ? '' : currentValue);
+                      setSearchParams((searchParams) => {
+                        if (genderValue !== currentValue) searchParams.set('gender', currentValue);
+                        else searchParams.delete('gender');
+
+                        return searchParams;
+                      });
+
+                      setOpen2(false);
+                    }}
+                  >
+                    {gender.label}
+                    <Check className={cn('ml-auto', genderValue === gender.value ? 'opacity-100' : 'opacity-0')} />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </PopoverContent>
+      </Popover>
       <div className="flex gap-2">
-        <MyInput placeholder="Min. price" />
-        <MyInput placeholder="Max. price" />
+        <MyInput
+          type="number"
+          placeholder="Min. price"
+        />
+        <MyInput
+          type="number"
+          placeholder="Max. price"
+        />
       </div>
     </div>
   );

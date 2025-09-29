@@ -14,7 +14,7 @@ export interface DoctorList {
 
 export function DoctorListCard({ full_name, gender, img, rating, price, address, lat, lng, specialty }: DoctorList) {
   return (
-    <div className="group flex rounded-xl border border-gray-200 bg-transparent p-3 transition hover:border-white hover:bg-teal-500">
+    <div className="group flex rounded-xl border border-gray-200 bg-transparent p-3 transition ease-out hover:border-white hover:bg-teal-500">
       <div className="me-3 h-20 w-20 overflow-hidden rounded-lg border-2 border-white bg-gray-500 group-hover:border-white">
         <img
           src={img}
