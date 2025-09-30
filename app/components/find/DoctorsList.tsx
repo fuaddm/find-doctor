@@ -1,3 +1,4 @@
+import { useActionData } from 'react-router';
 import { DoctorListCard, type DoctorList } from '~/components/molecules/DoctorListCard';
 
 const DOCTORS: DoctorList[] = [
@@ -59,21 +60,24 @@ const DOCTORS: DoctorList[] = [
 ];
 
 export function DoctorsList() {
+  const data = useActionData();
+  console.log(data);
+
   return (
     <div className="flex flex-col gap-2">
-      {DOCTORS.map((doctor) => {
+      {data?.map((doctor) => {
         return (
           <DoctorListCard
             key={doctor.full_name}
             full_name={doctor.full_name}
-            gender={doctor.gender}
-            img={doctor.img}
-            rating={doctor.rating}
+            gender={'male'}
+            img={''}
+            rating={5}
             price={doctor.price}
-            address={doctor.address}
-            lat={doctor.lat}
-            lng={doctor.lng}
-            specialty={doctor.specialty}
+            address={doctor.hospital.name}
+            lat={doctor.hospital.lat}
+            lng={doctor.hospital.lng}
+            specialty={doctor.profession.prf_name}
           />
         );
       })}

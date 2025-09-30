@@ -358,10 +358,26 @@ export function Filter() {
       <div className="flex gap-2">
         <MyInput
           type="number"
+          onChange={(e) => {
+            setSearchParams((searchParams) => {
+              if (e.target.value) searchParams.set('minPrice', e.target.value);
+              else searchParams.delete('minPrice');
+
+              return searchParams;
+            });
+          }}
           placeholder="Min. price"
         />
         <MyInput
           type="number"
+          onChange={(e) => {
+            setSearchParams((searchParams) => {
+              if (e.target.value) searchParams.set('maxPrice', e.target.value);
+              else searchParams.delete('maxPrice');
+
+              return searchParams;
+            });
+          }}
           placeholder="Max. price"
         />
       </div>

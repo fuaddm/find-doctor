@@ -1,4 +1,6 @@
 import { HandCoins, Star } from 'lucide-react';
+import MaleSvg from '~/assets/male.svg';
+import FemaleSvg from '~/assets/female.svg';
 
 export interface DoctorList {
   full_name: string;
@@ -17,7 +19,7 @@ export function DoctorListCard({ full_name, gender, img, rating, price, address,
     <div className="group flex rounded-xl border border-gray-200 bg-transparent p-3 transition ease-out hover:border-white hover:bg-teal-500">
       <div className="me-3 h-20 w-20 overflow-hidden rounded-lg border-2 border-white bg-gray-500 group-hover:border-white">
         <img
-          src={img}
+          src={img ? img : gender === 'male' ? MaleSvg : FemaleSvg}
           alt=""
           className="h-full w-full object-cover"
         />
