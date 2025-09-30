@@ -94,18 +94,18 @@ export function Chatbot() {
           </div>
         )}
         <div className="flex items-center justify-between">
-          <label className="group block rounded-full border border-gray-200 p-1.5 active:cursor-pointer">
+          <label className="group block rounded-full border border-gray-200 p-1.5 has-[input:focus]:cursor-pointer">
             <input
               ref={inputRef}
               type="file"
-              disabled={isLoading}
+              disabled={isLoading || true}
               className="hidden"
               accept=".png,.jpg,.jpeg,.webp,.pdf"
               onChange={fileOnChange}
             />
             <Paperclip
               size={16}
-              className="stroke-gray-400 transition active:group-hover:stroke-teal-500"
+              className="stroke-gray-400 transition group-has-[input:focus]:stroke-teal-500"
             />
           </label>
           <Button

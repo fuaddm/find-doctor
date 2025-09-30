@@ -69,7 +69,7 @@ export function Doctors() {
     <div className="relative grid grid-cols-1 gap-6 md:grid-cols-[450px_1fr]">
       <DoctorsList />
 
-      <APIProvider apiKey={''}>
+      <APIProvider apiKey={'AIzaSyDW3qNqDT4ZrF6E3uIoGQOHdB8qhIXkQaE'}>
         <div>
           <div className="sticky top-4">
             <GeoPanToUser />

@@ -63,7 +63,6 @@ const DOCTORS: DoctorList[] = [
 export function DoctorsList() {
   const data = useActionData();
   const navigation = useNavigation();
-  console.log(navigation);
 
   return (
     <div className="flex flex-col gap-2">
