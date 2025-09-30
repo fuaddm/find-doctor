@@ -2,6 +2,7 @@ import { DoctorsList } from '~/components/find/DoctorsList';
 import { useEffect } from 'react';
 import { AdvancedMarker, APIProvider, Map, useMap } from '@vis.gl/react-google-maps';
 import { RotateCcw } from 'lucide-react';
+import { useActionData } from 'react-router';
 
 const DEFAULT_CORDS = { lat: 40.39663013477836, lng: 49.86679038442161 };
 
@@ -37,6 +38,8 @@ function GeoPanToUser() {
 }
 
 export function Doctors() {
+  const data = useActionData();
+
   return (
     <div className="relative grid grid-cols-[450px_1fr] gap-6">
       <DoctorsList />
@@ -54,9 +57,14 @@ export function Doctors() {
                 disableDefaultUI={false}
                 mapTypeControl={false}
               >
-                <AdvancedMarker position={DEFAULT_CORDS}>
-                  <div className="h-4 w-4 bg-red-500"></div>
-                </AdvancedMarker>
+                {data?.map((doctor) => {
+                  return (
+                    <AdvancedMarker
+                      key={doctor.id + 'marker'}
+                      position={{ lat: doctor.hospital.lat, lng: doctor.hospital.long }}
+                    ></AdvancedMarker>
+                  );
+                })}
               </Map>
             </div>
           </div>

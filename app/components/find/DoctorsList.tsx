@@ -61,14 +61,13 @@ const DOCTORS: DoctorList[] = [
 
 export function DoctorsList() {
   const data = useActionData();
-  console.log(data);
 
   return (
     <div className="flex flex-col gap-2">
       {data?.map((doctor) => {
         return (
           <DoctorListCard
-            key={doctor.full_name}
+            key={doctor.id}
             full_name={doctor.full_name}
             gender={'male'}
             img={''}
