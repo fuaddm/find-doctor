@@ -150,3 +150,18 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.borderPulse {
+  animation: borderPulse 1.5s infinite alternate;
+}
+
+@keyframes borderPulse {
+  from {
+    border-color: var(--color-gray-200);
+    outline-color: var(--color-gray-200);
+  }
+  to {
+    border-color: var(--color-teal-100);
+    outline-color: var(--color-teal-50);
+  }
+}

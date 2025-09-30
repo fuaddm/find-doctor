@@ -1,5 +1,6 @@
-import { useActionData } from 'react-router';
+import { useActionData, useNavigation } from 'react-router';
 import { DoctorListCard, type DoctorList } from '~/components/molecules/DoctorListCard';
+import { DoctorCardListSkeleton } from '~/components/skeletons/DoctorCardListSkeleton';
 
 const DOCTORS: DoctorList[] = [
   {
@@ -61,6 +62,8 @@ const DOCTORS: DoctorList[] = [
 
 export function DoctorsList() {
   const data = useActionData();
+  const navigation = useNavigation();
+  console.log(navigation);
 
   return (
     <div className="flex flex-col gap-2">
@@ -80,6 +83,14 @@ export function DoctorsList() {
           />
         );
       })}
+      {navigation.state !== 'idle' && (
+        <>
+          <DoctorCardListSkeleton />
+          <DoctorCardListSkeleton />
+          <DoctorCardListSkeleton />
+          <DoctorCardListSkeleton />
+        </>
+      )}
     </div>
   );
 }

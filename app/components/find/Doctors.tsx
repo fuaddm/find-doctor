@@ -1,5 +1,5 @@
 import { DoctorsList } from '~/components/find/DoctorsList';
-import { useEffect } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { AdvancedMarker, APIProvider, Map, useMap } from '@vis.gl/react-google-maps';
 import { RotateCcw } from 'lucide-react';
 import { useActionData } from 'react-router';
@@ -37,11 +37,36 @@ function GeoPanToUser() {
   );
 }
 
+function FitToMarkers({ doctors }: { doctors: Array<{ hospital: { lat: number; long: number } }> }) {
+  const map = useMap();
+
+  const positions = useMemo(
+    () => doctors?.map((d) => ({ lat: d.hospital.lat, lng: d.hospital.long })) ?? [],
+    [doctors]
+  );
+
+  useEffect(() => {
+    if (!map || positions.length === 0 || !window.google) return;
+
+    if (positions.length === 1) {
+      map.setCenter(positions[0]);
+      map.setZoom(14);
+      return;
+    }
+
+    const bounds = new window.google.maps.LatLngBounds();
+    positions.forEach((p) => bounds.extend(p));
+    map.fitBounds(bounds, { top: 50, right: 50, bottom: 50, left: 50 }); // optional padding
+  }, [map, positions]);
+
+  return null; // this component only adjusts the camera
+}
+
 export function Doctors() {
   const data = useActionData();
 
   return (
-    <div className="relative grid grid-cols-[450px_1fr] gap-6">
+    <div className="relative grid grid-cols-1 gap-6 md:grid-cols-[450px_1fr]">
       <DoctorsList />
 
       <APIProvider apiKey={''}>
@@ -57,6 +82,8 @@ export function Doctors() {
                 disableDefaultUI={false}
                 mapTypeControl={false}
               >
+                <FitToMarkers doctors={data ?? []} />
+
                 {data?.map((doctor) => {
                   return (
                     <AdvancedMarker
