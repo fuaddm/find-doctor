@@ -355,7 +355,7 @@ export function Filter() {
           </Command>
         </PopoverContent>
       </Popover>
-      <div className="flex gap-2">
+      <div className="flex w-full gap-2">
         <MyInput
           type="number"
           onChange={(e) => {
@@ -367,6 +367,7 @@ export function Filter() {
             });
           }}
           placeholder="Min. price"
+          className="w-full"
         />
         <MyInput
           type="number"
@@ -379,6 +380,7 @@ export function Filter() {
             });
           }}
           placeholder="Max. price"
+          className="w-full"
         />
       </div>
     </div>

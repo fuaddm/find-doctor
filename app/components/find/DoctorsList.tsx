@@ -1,4 +1,4 @@
-import { useActionData, useNavigation } from 'react-router';
+import { useFetcher } from 'react-router';
 import { DoctorListCard, type DoctorList } from '~/components/molecules/DoctorListCard';
 import { DoctorCardListSkeleton } from '~/components/skeletons/DoctorCardListSkeleton';
 
@@ -61,34 +61,37 @@ const DOCTORS: DoctorList[] = [
 ];
 
 export function DoctorsList() {
-  const data = useActionData();
-  const navigation = useNavigation();
+  const fetcher = useFetcher({ key: 'msg-to-ai' });
 
   return (
-    <div className="flex flex-col gap-2">
-      {data?.map((doctor) => {
-        return (
-          <DoctorListCard
-            key={doctor.id}
-            full_name={doctor.full_name}
-            gender={'male'}
-            img={''}
-            rating={5}
-            price={doctor.price}
-            address={doctor.hospital.name}
-            lat={doctor.hospital.lat}
-            lng={doctor.hospital.lng}
-            specialty={doctor.profession.prf_name}
-          />
-        );
-      })}
-      {navigation.state !== 'idle' && (
-        <>
+    <div>
+      {fetcher.state === 'idle' && (
+        <div className="flex flex-col gap-2">
+          {fetcher.data?.map((doctor) => {
+            return (
+              <DoctorListCard
+                key={doctor.id}
+                full_name={doctor.full_name}
+                gender={'male'}
+                img={''}
+                rating={5}
+                price={doctor.price}
+                address={doctor.hospital.name}
+                lat={doctor.hospital.lat}
+                lng={doctor.hospital.lng}
+                specialty={doctor.profession.prf_name}
+              />
+            );
+          })}
+        </div>
+      )}
+      {fetcher.state !== 'idle' && (
+        <div className="flex flex-col gap-2">
           <DoctorCardListSkeleton />
           <DoctorCardListSkeleton />
           <DoctorCardListSkeleton />
           <DoctorCardListSkeleton />
-        </>
+        </div>
       )}
     </div>
   );

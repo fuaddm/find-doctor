@@ -1,8 +1,8 @@
 import { DoctorsList } from '~/components/find/DoctorsList';
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo } from 'react';
 import { AdvancedMarker, APIProvider, Map, useMap } from '@vis.gl/react-google-maps';
 import { RotateCcw } from 'lucide-react';
-import { useActionData } from 'react-router';
+import { useFetcher } from 'react-router';
 
 const DEFAULT_CORDS = { lat: 40.39663013477836, lng: 49.86679038442161 };
 
@@ -63,7 +63,7 @@ function FitToMarkers({ doctors }: { doctors: Array<{ hospital: { lat: number; l
 }
 
 export function Doctors() {
-  const data = useActionData();
+  const fetcher = useFetcher({ key: 'msg-to-ai' });
 
   return (
     <div className="relative grid grid-cols-1 gap-6 md:grid-cols-[450px_1fr]">
@@ -82,9 +82,9 @@ export function Doctors() {
                 disableDefaultUI={false}
                 mapTypeControl={false}
               >
-                <FitToMarkers doctors={data ?? []} />
+                <FitToMarkers doctors={fetcher.data ?? []} />
 
-                {data?.map((doctor) => {
+                {fetcher.data?.map((doctor) => {
                   return (
                     <AdvancedMarker
                       key={doctor.id + 'marker'}

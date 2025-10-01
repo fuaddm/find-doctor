@@ -1,14 +1,15 @@
 import { ArrowUp, Paperclip, Trash2 } from 'lucide-react';
-import { useRef, useState, type ChangeEvent } from 'react';
+import { useRef, useState, type ChangeEvent, type KeyboardEvent } from 'react';
 import { Button } from 'react-aria-components';
 import toast from 'react-hot-toast';
-import { Form, useNavigation } from 'react-router';
+import { useFetcher } from 'react-router';
 import { GetFileIcon } from '~/components/find/GetFileIcon';
+import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 import { cn } from '~/libs/cn';
 import { formatFileSize, getFileType } from '~/libs/file';
 
 export function Chatbot() {
-  const navigation = useNavigation();
+  const fetcher = useFetcher({ key: 'msg-to-ai' });
 
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [inputFile, setInputFile] = useState<File | null>(null);
@@ -35,10 +36,22 @@ export function Chatbot() {
     setInputFile(null);
   };
 
-  const isLoading = navigation.state !== 'idle';
+  const isLoading = fetcher.state !== 'idle';
+
+  function ChatOnKeyDown(e: KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key === 'Enter' && !e.shiftKey && !isLoading) {
+      e.preventDefault();
+      fetcher.submit(
+        { text: textareaValue, type: 'msg-to-ai' },
+        {
+          method: 'post',
+        }
+      );
+    }
+  }
 
   return (
-    <Form
+    <fetcher.Form
       method="POST"
       className={cn({
         'mb-10 w-full rounded-xl border border-gray-200 p-4 px-5 text-sm outline-6 outline-gray-200/50 transition-all has-focus:border-teal-100 has-focus:outline-teal-50': true,
@@ -51,6 +64,7 @@ export function Chatbot() {
         placeholder="Problem"
         rows={5}
         disabled={isLoading}
+        onKeyDown={ChatOnKeyDown}
         className={cn({
           'h-full w-full resize-none focus:outline-none': true,
           'text-gray-500': isLoading,
@@ -94,32 +108,42 @@ export function Chatbot() {
           </div>
         )}
         <div className="flex items-center justify-between">
-          <label className="group block rounded-full border border-gray-200 p-1.5 has-[input:focus]:cursor-pointer">
-            <input
-              ref={inputRef}
-              type="file"
-              disabled={isLoading || true}
-              className="hidden"
-              accept=".png,.jpg,.jpeg,.webp,.pdf"
-              onChange={fileOnChange}
-            />
-            <Paperclip
-              size={16}
-              className="stroke-gray-400 transition group-has-[input:focus]:stroke-teal-500"
-            />
-          </label>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <label className="group block rounded-full border border-gray-200 p-1.5 has-[input:focus]:cursor-pointer">
+                <input
+                  ref={inputRef}
+                  type="file"
+                  disabled={isLoading || true}
+                  className="hidden"
+                  accept=".png,.jpg,.jpeg,.webp,.pdf"
+                  onChange={fileOnChange}
+                />
+                <Paperclip
+                  size={16}
+                  className="stroke-gray-400 transition group-has-[input:focus]:stroke-teal-500"
+                />
+              </label>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className="relative z-10">Coming soon</p>
+            </TooltipContent>
+          </Tooltip>
           <Button
             type="submit"
             isDisabled={isLoading}
-            className="group relative z-20 rounded-lg bg-teal-600 p-2 outline-4 outline-transparent transition-all hover:outline-teal-100 active:cursor-pointer"
+            className="group relative z-20 rounded-lg bg-teal-600 p-2 outline-4 outline-transparent transition-all not-disabled:cursor-pointer not-disabled:hover:outline-teal-100"
           >
             <ArrowUp
               size={16}
-              className="stroke-white transition group-hover:rotate-90"
+              className={cn({
+                'stroke-white transition group-hover:rotate-90': true,
+                'rotate-90': isLoading,
+              })}
             />
           </Button>
         </div>
       </div>
-    </Form>
+    </fetcher.Form>
   );
 }
