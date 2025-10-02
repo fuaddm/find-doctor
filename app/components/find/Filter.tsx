@@ -6,6 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover
 import { useState } from 'react';
 import { MyInput } from '~/components/ui/input';
 import { useSearchParams } from 'react-router';
+import { debounce } from '~/libs/debounce';
 
 export const JOB_OPTIONS = [
   { value: 1, label: 'Aerokosmik Tibb' },
@@ -151,6 +152,17 @@ export function Filter() {
 
   const [open3, setOpen3] = useState(false);
   const [ratingValue, setRating] = useState(searchParams.get('rating') ?? '');
+
+  function setParamForPrice(value: string, name: 'minPrice' | 'maxPrice') {
+    setSearchParams((searchParams) => {
+      if (value) searchParams.set(name, value);
+      else searchParams.delete(name);
+
+      return searchParams;
+    });
+  }
+
+  const debouncedSearchParams = debounce(setParamForPrice, 500);
 
   return (
     <div className="mb-10 flex flex-col gap-2 md:flex-row md:gap-3">
@@ -439,12 +451,7 @@ export function Filter() {
           type="number"
           defaultValue={searchParams.get('minPrice') ?? ''}
           onChange={(e) => {
-            setSearchParams((searchParams) => {
-              if (e.target.value) searchParams.set('minPrice', e.target.value);
-              else searchParams.delete('minPrice');
-
-              return searchParams;
-            });
+            debouncedSearchParams(e.target.value, 'minPrice');
           }}
           placeholder="Min. price"
           className="w-full"
@@ -453,20 +460,12 @@ export function Filter() {
           type="number"
           defaultValue={searchParams.get('maxPrice') ?? ''}
           onChange={(e) => {
-            setSearchParams((searchParams) => {
-              if (e.target.value) searchParams.set('maxPrice', e.target.value);
-              else searchParams.delete('maxPrice');
-
-              return searchParams;
-            });
+            debouncedSearchParams(e.target.value, 'maxPrice');
           }}
           placeholder="Max. price"
           className="w-full"
         />
       </div>
-      <button className="rounded-md bg-teal-700 px-5 py-2 text-white transition hover:bg-teal-600 md:py-0">
-        Submit
-      </button>
     </div>
   );
 }
