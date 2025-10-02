@@ -1,8 +1,9 @@
 import { DoctorsList } from '~/components/find/DoctorsList';
-import { useEffect, useMemo } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import { AdvancedMarker, APIProvider, Map, useMap } from '@vis.gl/react-google-maps';
 import { RotateCcw } from 'lucide-react';
-import { useFetcher } from 'react-router';
+import { DoctorsContext } from '~/components/find/DoctorsContext';
+import { useSelectedDoctor } from '~/store/useSelectedDoctor';
 
 const DEFAULT_CORDS = { lat: 40.39663013477836, lng: 49.86679038442161 };
 
@@ -20,9 +21,6 @@ function GeoPanToUser() {
       { enableHighAccuracy: true, timeout: 10000 }
     );
   }
-  useEffect(() => {
-    setMapToCenter();
-  }, [map]);
 
   return (
     <div>
@@ -37,8 +35,21 @@ function GeoPanToUser() {
   );
 }
 
-function FitToMarkers({ doctors }: { doctors: Array<{ hospital: { lat: number; long: number } }> }) {
+function FitToMarkers({ doctors }: { doctors: any }) {
   const map = useMap();
+  const doctorId = useSelectedDoctor((state) => state.doctorId);
+
+  function setMapToCenter() {
+    if (!map || !navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        map.panTo({ lat: coords.latitude, lng: coords.longitude });
+        map.setZoom(14);
+      },
+      (err) => console.error('Geolocation error:', err),
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  }
 
   const positions = useMemo(
     () => doctors?.map((d) => ({ lat: d.hospital.lat, lng: d.hospital.long })) ?? [],
@@ -47,6 +58,8 @@ function FitToMarkers({ doctors }: { doctors: Array<{ hospital: { lat: number; l
 
   useEffect(() => {
     if (!map || positions.length === 0 || !window.google) return;
+
+    if (positions.length === 0) setMapToCenter();
 
     if (positions.length === 1) {
       map.setCenter(positions[0]);
@@ -59,11 +72,21 @@ function FitToMarkers({ doctors }: { doctors: Array<{ hospital: { lat: number; l
     map.fitBounds(bounds, { top: 50, right: 50, bottom: 50, left: 50 }); // optional padding
   }, [map, positions]);
 
+  useEffect(() => {
+    if (doctorId) {
+      const doctor = doctors?.find((doctor) => doctor.id === doctorId);
+      if (map) {
+        map.panTo({ lat: doctor.hospital.lat, lng: doctor.hospital.long });
+        map.setZoom(14);
+      }
+    }
+  }, [doctorId]);
+
   return null; // this component only adjusts the camera
 }
 
 export function Doctors() {
-  const fetcher = useFetcher({ key: 'msg-to-ai' });
+  const data = useContext(DoctorsContext);
 
   return (
     <div className="relative grid grid-cols-1 gap-6 md:grid-cols-[450px_1fr]">
@@ -82,9 +105,9 @@ export function Doctors() {
                 disableDefaultUI={false}
                 mapTypeControl={false}
               >
-                <FitToMarkers doctors={fetcher.data ?? []} />
+                <FitToMarkers doctors={data} />
 
-                {fetcher.data?.map((doctor) => {
+                {data.map((doctor) => {
                   return (
                     <AdvancedMarker
                       key={doctor.id + 'marker'}

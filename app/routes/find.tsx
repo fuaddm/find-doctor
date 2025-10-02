@@ -1,6 +1,8 @@
 import type { Route } from '.react-router/types/app/routes/+types/find';
+import { useFetcher } from 'react-router';
 import { Chatbot } from '~/components/find/Chatbot';
 import { Doctors } from '~/components/find/Doctors';
+import { DoctorsContext } from '~/components/find/doctorsContext';
 
 export async function action({ request }: Route.ClientActionArgs) {
   const formData = await request.formData();
@@ -21,10 +23,14 @@ export async function action({ request }: Route.ClientActionArgs) {
 }
 
 export default function FindPage() {
+  const fetcher = useFetcher({ key: 'msg-to-ai' });
+
   return (
     <div className="container py-10 pb-40">
       <Chatbot />
-      <Doctors />
+      <DoctorsContext value={fetcher.data ?? []}>
+        <Doctors />
+      </DoctorsContext>
     </div>
   );
 }
