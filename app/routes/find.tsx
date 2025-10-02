@@ -2,7 +2,7 @@ import type { Route } from '.react-router/types/app/routes/+types/find';
 import { useFetcher } from 'react-router';
 import { Chatbot } from '~/components/find/Chatbot';
 import { Doctors } from '~/components/find/Doctors';
-import { DoctorsContext } from '~/components/find/doctorsContext';
+import { DoctorsContext } from '~/components/find/DoctorsContext';
 
 export async function action({ request }: Route.ClientActionArgs) {
   const formData = await request.formData();

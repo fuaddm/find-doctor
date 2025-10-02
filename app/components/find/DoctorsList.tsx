@@ -28,7 +28,7 @@ export function DoctorsList() {
                 address={doctor.hospital.name}
                 lat={doctor.hospital.lat}
                 lng={doctor.hospital.lng}
-                specialty={doctor.profession.prf_name}
+                specialty={doctor.profession.name ?? doctor.profession.prf_name}
                 isSelected={doctorId === doctor.id}
               />
             );

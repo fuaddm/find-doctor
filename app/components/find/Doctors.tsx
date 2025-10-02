@@ -35,7 +35,7 @@ function GeoPanToUser() {
   );
 }
 
-function FitToMarkers({ doctors }: { doctors: any }) {
+function FitToMarkers({ doctors }: { doctors: Array<any> }) {
   const map = useMap();
   const doctorId = useSelectedDoctor((state) => state.doctorId);
 
@@ -74,8 +74,8 @@ function FitToMarkers({ doctors }: { doctors: any }) {
 
   useEffect(() => {
     if (doctorId) {
-      const doctor = doctors?.find((doctor) => doctor.id === doctorId);
-      if (map) {
+      const doctor = doctors.find((doctor) => doctor.id === doctorId);
+      if (map && doctor) {
         map.panTo({ lat: doctor.hospital.lat, lng: doctor.hospital.long });
         map.setZoom(14);
       }
