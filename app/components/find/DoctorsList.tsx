@@ -1,8 +1,10 @@
+import { distance, point } from '@turf/turf';
 import { useContext } from 'react';
 import { useFetcher } from 'react-router';
 import { DoctorsContext } from '~/components/find/DoctorsContext';
 import { DoctorListCard } from '~/components/molecules/DoctorListCard';
 import { DoctorCardListSkeleton } from '~/components/skeletons/DoctorCardListSkeleton';
+import { useMyLocationStore } from '~/store/useMyLocation';
 import { useSelectedDoctor } from '~/store/useSelectedDoctor';
 
 export function DoctorsList() {
@@ -10,12 +12,19 @@ export function DoctorsList() {
   const data = useContext(DoctorsContext);
   const doctorId = useSelectedDoctor((state) => state.doctorId);
   const setDoctorId = useSelectedDoctor((state) => state.setDoctorId);
+  const myLocation = useMyLocationStore((state) => state.myLocation);
 
   return (
     <div>
       {fetcher.state === 'idle' && (
         <div className="flex flex-col gap-2">
           {data.map((doctor) => {
+            let km = null;
+            if (myLocation) {
+              const from = point([myLocation.lat, myLocation.lng]);
+              const to = point([doctor.hospital.lat, doctor.hospital.long]);
+              km = distance(from, to, { units: 'kilometers' });
+            }
             return (
               <DoctorListCard
                 key={doctor.id}
@@ -27,7 +36,9 @@ export function DoctorsList() {
                 price={doctor.price}
                 address={doctor.hospital.name}
                 lat={doctor.hospital.lat}
-                lng={doctor.hospital.lng}
+                lng={doctor.hospital.long}
+                distance={km}
+                workHours={doctor.is_saatlari}
                 specialty={doctor.profession.name ?? doctor.profession.prf_name}
                 isSelected={doctorId === doctor.id}
               />
