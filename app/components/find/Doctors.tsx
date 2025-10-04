@@ -13,6 +13,23 @@ function GeoPanToUser() {
   const myLocation = useMyLocationStore((state) => state.myLocation);
   const setMyLocation = useMyLocationStore((state) => state.setMyLocation);
 
+  useEffect(() => {
+    if (!map || !navigator.geolocation) return;
+
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        const pos = { lat: coords.latitude, lng: coords.longitude };
+        map.setCenter(pos);
+        map.setZoom(14);
+        setMyLocation(pos);
+      },
+      (err) => {
+        console.error('Geolocation error:', err);
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  }, [map]);
+
   function setMapToCenter() {
     if (!map || !navigator.geolocation) return;
     navigator.geolocation.getCurrentPosition(
