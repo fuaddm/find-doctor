@@ -21,17 +21,11 @@ export function Header() {
               logo
             </Link>
             <nav className="hidden items-center gap-5 md:flex">
-              <Link to="#">
+              <Link to="#about">
                 <TextUpAnimation text="Haqqımızda" />
               </Link>
-              <Link to="#">
+              <Link to="#services">
                 <TextUpAnimation text="Xidmətlər" />
-              </Link>
-              <Link to="#">
-                <TextUpAnimation text="Həkimlər" />
-              </Link>
-              <Link to="#">
-                <TextUpAnimation text="Məqalələr" />
               </Link>
               <Link
                 to="/find"
@@ -65,28 +59,16 @@ export function Header() {
           })}
         >
           <Link
-            to="#"
+            to="#about"
             onClick={toggleMenu}
           >
             Haqqımızda
           </Link>
           <Link
-            to="#"
+            to="#services"
             onClick={toggleMenu}
           >
             Xidmətlər
-          </Link>
-          <Link
-            to="#"
-            onClick={toggleMenu}
-          >
-            Həkimlər
-          </Link>
-          <Link
-            to="#"
-            onClick={toggleMenu}
-          >
-            Məqalələr
           </Link>
           <Link
             to="/find"

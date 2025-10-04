@@ -11,7 +11,10 @@ import { Card } from '~/components/molecules/Card';
 
 export function Services() {
   return (
-    <div className="container py-10">
+    <div
+      id="services"
+      className="container py-10"
+    >
       <SectionHeader
         suptitle="Xidmətlər"
         title="Peşəkar tibbi xidmət – sadə və əlçatan"

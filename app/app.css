@@ -21,6 +21,8 @@
 
 html,
 body {
+  scroll-behavior: smooth;
+
   @apply bg-white text-black;
 
   @media (prefers-color-scheme: dark) {

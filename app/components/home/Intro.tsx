@@ -4,11 +4,14 @@ import reviewPic1 from '~/assets/review-1.webp';
 import reviewPic2 from '~/assets/review-2.webp';
 import reviewPic3 from '~/assets/review-3.webp';
 import reviewPic4 from '~/assets/review-4.webp';
-import doctorPic from '~/assets/doctor.webp';
+import doctorPic from '~/assets/main-doctor.webp';
 
 export function Intro() {
   return (
-    <div className="container pt-10 pb-10 md:pt-2">
+    <div
+      id="about"
+      className="container pt-10 pb-10 md:pt-2"
+    >
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center md:gap-20">
         <div>
           <div className="mb-6 flex items-center gap-3">
@@ -131,7 +134,7 @@ export function Intro() {
               <img
                 src={doctorPic}
                 width={420}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover object-top"
                 alt=""
               />
               <div className="absolute bottom-0 left-0 flex w-full items-end justify-between px-6 pt-12 pb-5">
