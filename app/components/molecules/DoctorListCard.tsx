@@ -81,7 +81,7 @@ export function DoctorListCard({
         </div>
       </div>
       <div className="ms-auto flex flex-col items-end gap-1">
-        <div
+        {/* <div
           className={cn({
             'flex items-center gap-1 rounded-full bg-orange-500 px-2 py-0.25': true,
             'bg-orange-100': isSelected,
@@ -102,7 +102,7 @@ export function DoctorListCard({
           >
             {rating}
           </div>
-        </div>
+        </div> */}
         <div
           className={cn({
             'flex items-center gap-1 rounded-full bg-green-500 px-2 py-0.25': true,

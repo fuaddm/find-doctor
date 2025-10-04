@@ -164,3 +164,16 @@ body {
     outline-color: var(--color-teal-50);
   }
 }
+
+.skeletonEffect {
+  animation: skeletonAnimation 1s linear infinite alternate;
+}
+
+@keyframes skeletonAnimation {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.7;
+  }
+}

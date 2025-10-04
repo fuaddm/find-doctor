@@ -1,15 +1,17 @@
 import { DoctorsList } from '~/components/find/DoctorsList';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import { AdvancedMarker, APIProvider, Map, useMap } from '@vis.gl/react-google-maps';
-import { Locate, LocateFixed, RotateCcw } from 'lucide-react';
+import { Locate, LocateFixed } from 'lucide-react';
 import { DoctorsContext } from '~/components/find/DoctorsContext';
 import { useSelectedDoctor } from '~/store/useSelectedDoctor';
+import { useMyLocationStore } from '~/store/useMyLocation';
 
 const DEFAULT_CORDS = { lat: 40.39663013477836, lng: 49.86679038442161 };
 
 function GeoPanToUser() {
   const map = useMap();
-  const [hasUserLocated, setHasUserLocated] = useState(false);
+  const myLocation = useMyLocationStore((state) => state.myLocation);
+  const setMyLocation = useMyLocationStore((state) => state.setMyLocation);
 
   function setMapToCenter() {
     if (!map || !navigator.geolocation) return;
@@ -17,7 +19,7 @@ function GeoPanToUser() {
       ({ coords }) => {
         map.panTo({ lat: coords.latitude, lng: coords.longitude });
         map.setZoom(14);
-        setHasUserLocated(true);
+        setMyLocation({ lat: coords.latitude, lng: coords.longitude });
       },
       (err) => console.error('Geolocation error:', err),
       { enableHighAccuracy: true, timeout: 10000 }
@@ -30,7 +32,7 @@ function GeoPanToUser() {
         className="mb-2 flex w-full items-center justify-center gap-2 rounded-md bg-teal-700 py-2 text-center text-white"
         onClick={setMapToCenter}
       >
-        {hasUserLocated ? <LocateFixed size={18} /> : <Locate size={18} />}
+        {myLocation !== null ? <LocateFixed size={18} /> : <Locate size={18} />}
 
         <span>Hazırkı mövqeyimə qayıt</span>
       </button>
@@ -76,6 +78,7 @@ function FitToMarkers({ doctors }: { doctors: Array<any> }) {
 
 export function Doctors() {
   const data = useContext(DoctorsContext);
+  const myLocation = useMyLocationStore((state) => state.myLocation);
 
   return (
     <div className="relative grid grid-cols-1 gap-6 md:grid-cols-[450px_1fr]">
@@ -104,6 +107,11 @@ export function Doctors() {
                     ></AdvancedMarker>
                   );
                 })}
+                {myLocation && (
+                  <AdvancedMarker position={myLocation}>
+                    <div className="h-3 w-3 rounded-full border-1 border-white bg-blue-500 shadow-[0px_0px_0px_3px_rgba(43,127,255,0.5)]"></div>
+                  </AdvancedMarker>
+                )}
               </Map>
             </div>
           </div>

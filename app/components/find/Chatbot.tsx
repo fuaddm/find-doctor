@@ -62,11 +62,10 @@ export function Chatbot() {
         name="text"
         id=""
         placeholder="Narahatlığınızı və ya simptomlarınızı qeyd edin"
-        rows={5}
         disabled={isLoading}
         onKeyDown={ChatOnKeyDown}
         className={cn({
-          'h-full w-full resize-none focus:outline-none': true,
+          'field-sizing-content h-fit max-h-[200px] min-h-[100px] w-full resize-none focus:outline-none': true,
           'text-gray-500': isLoading,
         })}
         onChange={(e) => setTextareaValue(e.target.value)}
