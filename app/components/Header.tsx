@@ -10,74 +10,104 @@ export function Header() {
   const toggleMenu = useMenuStore((state) => state.toggleMenu);
 
   return (
-    <div className="sticky top-0 left-0 z-1000 md:relative">
-      <div className="relative z-100 bg-white">
-        <div className="container flex items-center justify-between py-6">
-          <Link
-            to="/"
-            className="w-fit"
-          >
-            logo
-          </Link>
-          <nav className="hidden items-center gap-5 md:flex">
-            <Link to="#">
-              <TextUpAnimation text="Haqqımızda" />
-            </Link>
-            <Link to="#">
-              <TextUpAnimation text="Xidmətlər" />
-            </Link>
-            <Link to="#">
-              <TextUpAnimation text="Həkimlər" />
-            </Link>
-            <Link to="#">
-              <TextUpAnimation text="Məqalələr" />
-            </Link>
+    <>
+      <div className="sticky top-0 left-0 z-1000 md:relative">
+        <div className="relative z-100 bg-white">
+          <div className="container flex items-center justify-between py-6">
             <Link
-              to="/find"
-              className="group flex items-center gap-2 rounded-full bg-teal-500 px-4 py-2 text-white transition hover:bg-teal-400"
+              to="/"
+              className="w-fit"
             >
-              <span>FindDoc-a keç</span>
-              <ArrowRight
-                size={16}
-                className="transition group-hover:translate-x-0.75"
-              />
+              logo
             </Link>
-          </nav>
-          <Button
-            onPress={toggleMenu}
-            className={cn({
-              'block aspect-square w-fit rounded-full bg-teal-500 p-3 transition md:hidden': true,
-              'rotate-90': isOpen,
-            })}
+            <nav className="hidden items-center gap-5 md:flex">
+              <Link to="#">
+                <TextUpAnimation text="Haqqımızda" />
+              </Link>
+              <Link to="#">
+                <TextUpAnimation text="Xidmətlər" />
+              </Link>
+              <Link to="#">
+                <TextUpAnimation text="Həkimlər" />
+              </Link>
+              <Link to="#">
+                <TextUpAnimation text="Məqalələr" />
+              </Link>
+              <Link
+                to="/find"
+                className="group flex items-center gap-2 rounded-full bg-teal-500 px-4 py-2 text-white transition hover:bg-teal-400"
+              >
+                <span>FindDoc-a keç</span>
+                <ArrowRight
+                  size={16}
+                  className="transition group-hover:translate-x-0.75"
+                />
+              </Link>
+            </nav>
+            <Button
+              onPress={toggleMenu}
+              className={cn({
+                'block aspect-square w-fit rounded-full bg-teal-500 p-3 transition md:hidden': true,
+                'rotate-90': isOpen,
+              })}
+            >
+              <Menu
+                size={20}
+                className="stroke-white"
+              />
+            </Button>
+          </div>
+        </div>
+        <div
+          className={cn({
+            'absolute top-[calc(100%+1px)] left-0 z-0 flex w-full -translate-y-full flex-col items-center justify-center gap-6 overflow-hidden border-b border-gray-200 bg-white pt-2 pb-8 transition md:hidden': true,
+            '-translate-y-px': isOpen,
+          })}
+        >
+          <Link
+            to="#"
+            onClick={toggleMenu}
           >
-            <Menu
-              size={20}
-              className="stroke-white"
+            Haqqımızda
+          </Link>
+          <Link
+            to="#"
+            onClick={toggleMenu}
+          >
+            Xidmətlər
+          </Link>
+          <Link
+            to="#"
+            onClick={toggleMenu}
+          >
+            Həkimlər
+          </Link>
+          <Link
+            to="#"
+            onClick={toggleMenu}
+          >
+            Məqalələr
+          </Link>
+          <Link
+            to="/find"
+            onClick={toggleMenu}
+            className="group flex items-center gap-2 rounded-full bg-teal-600 px-4 py-2 text-white transition hover:bg-teal-500"
+          >
+            <span>FindDoc-a keç</span>
+            <ArrowRight
+              size={16}
+              className="transition group-hover:translate-x-0.75"
             />
-          </Button>
+          </Link>
         </div>
       </div>
       <div
+        onClick={toggleMenu}
         className={cn({
-          'absolute top-[calc(100%+1px)] left-0 z-0 flex w-full -translate-y-full flex-col items-center justify-center gap-6 overflow-hidden border-b border-gray-200 bg-white pt-2 pb-8 transition md:hidden': true,
-          'translate-y-0': isOpen,
+          'invisible fixed top-0 left-0 z-999 h-full w-full bg-black/30 opacity-0 transition': true,
+          'visible opacity-100': isOpen,
         })}
-      >
-        <Link to="#">Haqqımızda</Link>
-        <Link to="#">Xidmətlər</Link>
-        <Link to="#">Həkimlər</Link>
-        <Link to="#">Məqalələr</Link>
-        <Link
-          to="/find"
-          className="group flex items-center gap-2 rounded-full bg-teal-600 px-4 py-2 text-white transition hover:bg-teal-500"
-        >
-          <span>FindDoc-a keç</span>
-          <ArrowRight
-            size={16}
-            className="transition group-hover:translate-x-0.75"
-          />
-        </Link>
-      </div>
-    </div>
+      ></div>
+    </>
   );
 }

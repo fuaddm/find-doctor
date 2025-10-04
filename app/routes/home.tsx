@@ -4,7 +4,13 @@ import { Intro } from '~/components/home/Intro';
 import { Banner } from '~/components/home/Banner';
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: 'New React Router App' }, { name: 'description', content: 'Welcome to React Router!' }];
+  return [
+    { title: 'Ana səhifə | Sağlamlığın üçün doğru ünvanı tap' },
+    {
+      name: 'description',
+      content: 'Minlərlə həkim arasından sənə uyğun olanı tap və peşəkar tibbi xidmətlərlə tanış ol',
+    },
+  ];
 }
 
 export default function Home() {
