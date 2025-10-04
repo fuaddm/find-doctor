@@ -11,8 +11,8 @@ export function Footer() {
         >
           logo
         </Link>
-        <div className="text-xl font-medium text-gray-500">
-          Stay up to date on the latest features and releases by joining our socials
+        <div className="text-lg font-medium text-gray-500">
+          Yeniliklər və son paylaşımlardan xəbərdar qalmaq üçün bizi sosial şəbəkələrdə izləyin
         </div>
         <div className="flex flex-wrap gap-2">
           <Link
@@ -52,7 +52,7 @@ export function Footer() {
               className="stroke-white"
             />
           </div>
-          <div className="font-medium text-gray-500">dmirciyevfuad@mail.ru</div>
+          <div className="font-medium text-gray-500">find_doc@gmail.com</div>
         </div>
         <div className="flex items-center gap-3">
           <div className="rounded-full bg-teal-600 p-2">
@@ -61,7 +61,7 @@ export function Footer() {
               className="stroke-white"
             />
           </div>
-          <div className="font-medium text-gray-500">+994 77 295 89 91</div>
+          <div className="font-medium text-gray-500">+994 55 555 55 55</div>
         </div>
       </div>
     </div>

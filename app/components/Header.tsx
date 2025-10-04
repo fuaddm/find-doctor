@@ -21,22 +21,22 @@ export function Header() {
           </Link>
           <nav className="hidden items-center gap-5 md:flex">
             <Link to="#">
-              <TextUpAnimation text="About" />
+              <TextUpAnimation text="Haqqımızda" />
             </Link>
             <Link to="#">
-              <TextUpAnimation text="Services" />
+              <TextUpAnimation text="Xidmətlər" />
             </Link>
             <Link to="#">
-              <TextUpAnimation text="Doctors" />
+              <TextUpAnimation text="Həkimlər" />
             </Link>
             <Link to="#">
-              <TextUpAnimation text="Blog" />
+              <TextUpAnimation text="Məqalələr" />
             </Link>
             <Link
               to="/find"
               className="group flex items-center gap-2 rounded-full bg-teal-500 px-4 py-2 text-white transition hover:bg-teal-400"
             >
-              <span>Go to FindDoc</span>
+              <span>FindDoc-a keç</span>
               <ArrowRight
                 size={16}
                 className="transition group-hover:translate-x-0.75"
@@ -63,15 +63,15 @@ export function Header() {
           'translate-y-0': isOpen,
         })}
       >
-        <Link to="#">About</Link>
-        <Link to="#">Services</Link>
-        <Link to="#">Doctors</Link>
-        <Link to="#">Blog</Link>
+        <Link to="#">Haqqımızda</Link>
+        <Link to="#">Xidmətlər</Link>
+        <Link to="#">Həkimlər</Link>
+        <Link to="#">Məqalələr</Link>
         <Link
           to="/find"
           className="group flex items-center gap-2 rounded-full bg-teal-600 px-4 py-2 text-white transition hover:bg-teal-500"
         >
-          <span>Go to FindDoc</span>
+          <span>FindDoc-a keç</span>
           <ArrowRight
             size={16}
             className="transition group-hover:translate-x-0.75"

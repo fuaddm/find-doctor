@@ -67,21 +67,19 @@ export function Intro() {
                   className="fill-orange-400 stroke-orange-400"
                 />
               </div>
-              <div className="text-sm font-medium">Based on 20K+ Reviews</div>
+              <div className="text-sm font-medium">Minlərlə rəyə əsasən</div>
             </div>
           </div>
-          <h1 className="mb-6 text-[54px] leading-16 font-medium tracking-tight">
-            Search any doctors & plan your next visit
+          <h1 className="mb-6 text-4xl leading-12 font-medium tracking-tight md:text-[54px] md:leading-16">
+            Sağlamlığın üçün doğru ünvanı tap
           </h1>
-          <div className="mb-6 font-medium text-gray-500">
-            Experience leading healthcare services with expert treatments tailored to your work needs
-          </div>
-          <div className="mb-8 flex items-center gap-2">
+          <div className="mb-6 font-medium text-gray-500">Minlərlə ixtisaslı həkim arasından sənə uyğun olanı tap</div>
+          <div className="mb-8 flex flex-wrap items-center gap-2">
             <Link
               to="/find"
               className="group flex items-center gap-2 rounded-full bg-teal-600 px-4 py-2 text-white transition hover:bg-teal-500"
             >
-              <span>Go to FindDoc</span>
+              <span>FindDoc-a keç</span>
               <ArrowRight
                 size={16}
                 className="transition group-hover:translate-x-0.75"
@@ -91,37 +89,39 @@ export function Intro() {
               to="#"
               className="group flex items-center gap-2 rounded-full px-4 py-2 font-medium transition"
             >
-              <span>What we do</span>
+              <span>Fəaliyyətimiz</span>
               <ArrowUpRight
                 size={16}
                 className="transition group-hover:translate-x-0.75 group-hover:-translate-y-0.75"
               />
             </Link>
           </div>
-          <div className="flex gap-8">
+          <div className="flex flex-wrap gap-8">
             <div className="flex items-center gap-4">
               <UsersRound
                 size={32}
-                className="stroke-teal-800"
+                className="aspect-square max-w-[32px] min-w-[32px] stroke-teal-800"
               />
               <div className="flex flex-col gap-1">
-                <div className="text-lg font-medium">Support</div>
-                <div className="text-xs font-medium text-gray-500">24/7 care access</div>
+                <div className="text-lg font-medium">Dəstək</div>
+                <div className="text-xs font-medium text-gray-500">24/7 xidmət</div>
               </div>
             </div>
             <div className="flex items-center gap-4">
               <UserStar
                 size={32}
-                className="stroke-teal-800"
+                className="aspect-square max-w-[32px] min-w-[32px] stroke-teal-800"
               />
               <div className="flex flex-col gap-1">
-                <div className="text-lg font-medium">Rating</div>
-                <div className="text-xs font-medium text-gray-500">Rated 5 stars by users</div>
+                <div className="text-lg font-medium">Reytinq</div>
+                <div className="text-xs font-medium text-gray-500">
+                  İstifadəçilər tərəfindən 5 ulduzla qiymətləndirilib
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex md:justify-end">
+        <div className="flex justify-center md:justify-end">
           <Link
             to="#"
             className="group/card relative block aspect-[1/1.2] w-full max-w-[420px]"
@@ -134,11 +134,11 @@ export function Intro() {
                 className="h-full w-full object-cover"
                 alt=""
               />
-              <div className="absolute bottom-0 left-0 flex w-full items-center justify-between px-6 pt-12 pb-5">
+              <div className="absolute bottom-0 left-0 flex w-full items-end justify-between px-6 pt-12 pb-5">
                 <div className="absolute top-0 left-0 z-10 h-full w-full backdrop-blur-[12px] [mask:linear-gradient(transparent,var(--color-teal-800),var(--color-teal-800))]"></div>
                 <div className="relative z-20">
-                  <div className="mb-0.5 font-medium text-white">Psychologist</div>
-                  <div className="text-2xl font-medium text-white">John Watson</div>
+                  <div className="mb-0.5 font-medium text-white">Psixoloq</div>
+                  <div className="text-2xl font-medium text-white">Dr. Elçin Məmmədov</div>
                 </div>
                 <div className="relative z-20 overflow-hidden rounded-full bg-teal-600 p-2 transition group-hover/card:bg-teal-500">
                   <ArrowUpRight

@@ -3,6 +3,9 @@ import { Link } from 'react-router';
 import cardiologyPic from '~/assets/cardiology.webp';
 import pediatricsPic from '~/assets/pediatrics.webp';
 import neurologyPic from '~/assets/neurology.webp';
+import generalCarePic from '~/assets/general-care.webp';
+import ostPic from '~/assets/ort.webp';
+import gastPic from '~/assets/gast.webp';
 import { SectionHeader } from '~/components/molecules/SectionHeader';
 import { Card } from '~/components/molecules/Card';
 
@@ -10,16 +13,16 @@ export function Services() {
   return (
     <div className="container py-10">
       <SectionHeader
-        suptitle="Services"
-        title="Expert care made simple"
-        subtitle="We offer a wide range of expert-led healthcare services built to support your well-being"
+        suptitle="Xidmətlər"
+        title="Peşəkar tibbi xidmət – sadə və əlçatan"
+        subtitle="Sağlamlığını dəstəkləmək üçün mütəxəssislər tərəfindən göstərilən geniş tibbi xidmətlər təklif edirik"
         className="mb-10"
       >
         <Link
           to="#"
           className="group flex items-center gap-2"
         >
-          <div>View all services</div>
+          <div>Bütün xidmətlərə bax</div>
           <div className="relative overflow-hidden">
             <ArrowUpRight
               size={16}
@@ -31,36 +34,36 @@ export function Services() {
           </div>
         </Link>
       </SectionHeader>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
         <Card
           to="#"
-          title="Cardiology"
+          title="Kardioloq"
           img={cardiologyPic}
         />
         <Card
           to="#"
-          title="Pediatrics"
+          title="Pediatr"
           img={pediatricsPic}
         />
         <Card
           to="#"
-          title="Neurology"
+          title="Nevroloq"
           img={neurologyPic}
         />
         <Card
           to="#"
-          title="Cardiology"
-          img={cardiologyPic}
+          title="Ailə Təbabəti"
+          img={generalCarePic}
         />
         <Card
           to="#"
-          title="Pediatrics"
-          img={pediatricsPic}
+          title="Ortoped"
+          img={ostPic}
         />
         <Card
           to="#"
-          title="Neurology"
-          img={neurologyPic}
+          title="Qastroenteroloq"
+          img={gastPic}
         />
       </div>
     </div>

@@ -24,8 +24,8 @@ export function SectionHeader({
       })}
     >
       <div className="w-fit rounded-full border border-gray-200 px-3 py-1.5 text-sm font-medium">{suptitle}</div>
-      <div className="mx-auto text-4xl font-medium">{title}</div>
-      <div className="mx-auto text-lg text-gray-500">{subtitle}</div>
+      <div className="mx-auto text-3xl font-medium md:text-4xl">{title}</div>
+      <div className="mx-auto text-base text-gray-500 md:text-lg">{subtitle}</div>
       {children}
     </div>
   );

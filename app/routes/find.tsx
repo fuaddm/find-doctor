@@ -3,6 +3,7 @@ import { useFetcher } from 'react-router';
 import { Chatbot } from '~/components/find/Chatbot';
 import { Doctors } from '~/components/find/Doctors';
 import { DoctorsContext } from '~/components/find/DoctorsContext';
+import { Filter } from '~/components/find/Filter';
 
 export async function action({ request }: Route.ClientActionArgs) {
   const formData = await request.formData();

@@ -1,7 +1,7 @@
 import { DoctorsList } from '~/components/find/DoctorsList';
-import { useContext, useEffect, useMemo } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { AdvancedMarker, APIProvider, Map, useMap } from '@vis.gl/react-google-maps';
-import { RotateCcw } from 'lucide-react';
+import { Locate, LocateFixed, RotateCcw } from 'lucide-react';
 import { DoctorsContext } from '~/components/find/DoctorsContext';
 import { useSelectedDoctor } from '~/store/useSelectedDoctor';
 
@@ -9,6 +9,7 @@ const DEFAULT_CORDS = { lat: 40.39663013477836, lng: 49.86679038442161 };
 
 function GeoPanToUser() {
   const map = useMap();
+  const [hasUserLocated, setHasUserLocated] = useState(false);
 
   function setMapToCenter() {
     if (!map || !navigator.geolocation) return;
@@ -16,6 +17,7 @@ function GeoPanToUser() {
       ({ coords }) => {
         map.panTo({ lat: coords.latitude, lng: coords.longitude });
         map.setZoom(14);
+        setHasUserLocated(true);
       },
       (err) => console.error('Geolocation error:', err),
       { enableHighAccuracy: true, timeout: 10000 }
@@ -28,8 +30,9 @@ function GeoPanToUser() {
         className="mb-2 flex w-full items-center justify-center gap-2 rounded-md bg-teal-700 py-2 text-center text-white"
         onClick={setMapToCenter}
       >
-        <RotateCcw size={18} />
-        <span>Back to center</span>
+        {hasUserLocated ? <LocateFixed size={18} /> : <Locate size={18} />}
+
+        <span>Hazırkı mövqeyimə qayıt</span>
       </button>
     </div>
   );
@@ -39,18 +42,6 @@ function FitToMarkers({ doctors }: { doctors: Array<any> }) {
   const map = useMap();
   const doctorId = useSelectedDoctor((state) => state.doctorId);
 
-  function setMapToCenter() {
-    if (!map || !navigator.geolocation) return;
-    navigator.geolocation.getCurrentPosition(
-      ({ coords }) => {
-        map.panTo({ lat: coords.latitude, lng: coords.longitude });
-        map.setZoom(14);
-      },
-      (err) => console.error('Geolocation error:', err),
-      { enableHighAccuracy: true, timeout: 10000 }
-    );
-  }
-
   const positions = useMemo(
     () => doctors?.map((d) => ({ lat: d.hospital.lat, lng: d.hospital.long })) ?? [],
     [doctors]
@@ -58,8 +49,6 @@ function FitToMarkers({ doctors }: { doctors: Array<any> }) {
 
   useEffect(() => {
     if (!map || positions.length === 0 || !window.google) return;
-
-    if (positions.length === 0) setMapToCenter();
 
     if (positions.length === 1) {
       map.setCenter(positions[0]);

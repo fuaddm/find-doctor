@@ -61,7 +61,7 @@ export function Chatbot() {
       <textarea
         name="text"
         id=""
-        placeholder="Problem"
+        placeholder="Narahatlığınızı və ya simptomlarınızı qeyd edin"
         rows={5}
         disabled={isLoading}
         onKeyDown={ChatOnKeyDown}
