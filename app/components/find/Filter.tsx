@@ -137,8 +137,8 @@ export const JOB_OPTIONS = [
 ];
 
 const GENDERS = [
-  { value: 'Male', label: 'Male' },
-  { value: 'Female', label: 'Female' },
+  { value: 'Male', label: 'Kişi' },
+  { value: 'Female', label: 'Qadın' },
 ];
 
 export function Filter() {
@@ -165,7 +165,7 @@ export function Filter() {
   const debouncedSearchParams = debounce(setParamForPrice, 500);
 
   return (
-    <div className="mb-10 flex flex-col gap-2 md:flex-row md:gap-3">
+    <div className="mb-10 flex flex-col gap-2 overflow-auto py-1 md:flex-row md:gap-3">
       <Popover
         open={open}
         onOpenChange={setOpen}
@@ -179,7 +179,7 @@ export function Filter() {
           >
             {professionValue
               ? JOB_OPTIONS.find((job) => String(job.value) === professionValue)?.label
-              : 'Select specialty...'}
+              : 'Həkim ixtisasını seçin...'}
             <ChevronsUpDown className="opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -190,11 +190,11 @@ export function Filter() {
         >
           <Command>
             <CommandInput
-              placeholder="Search job..."
+              placeholder="Həkim ixtisası axtarın..."
               className="h-9"
             />
             <CommandList>
-              <CommandEmpty>No specialty found.</CommandEmpty>
+              <CommandEmpty>Heç bir ixtisas tapılmadı.</CommandEmpty>
               <CommandGroup>
                 {JOB_OPTIONS.map((job) => (
                   <CommandItem
@@ -224,7 +224,7 @@ export function Filter() {
           </Command>
         </PopoverContent>
       </Popover>
-      <Popover
+      {/* <Popover
         open={open3}
         onOpenChange={setOpen3}
       >
@@ -396,7 +396,7 @@ export function Filter() {
             </CommandList>
           </Command>
         </PopoverContent>
-      </Popover>
+      </Popover> */}
       <Popover
         open={open2}
         onOpenChange={setOpen2}
@@ -406,9 +406,9 @@ export function Filter() {
             variant="outline"
             role="combobox"
             aria-expanded={open2}
-            className="w-full justify-between md:w-[150px]"
+            className="w-full justify-between md:w-[200px]"
           >
-            {genderValue ? GENDERS.find((gender) => gender.value === genderValue)?.label : 'Select gender...'}
+            {genderValue ? GENDERS.find((gender) => gender.value === genderValue)?.label : 'Cinsiyyəti seçin...'}
             <ChevronsUpDown className="opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -419,7 +419,6 @@ export function Filter() {
         >
           <Command>
             <CommandList>
-              <CommandEmpty>No gender found.</CommandEmpty>
               <CommandGroup>
                 {GENDERS.map((gender) => (
                   <CommandItem
@@ -446,14 +445,14 @@ export function Filter() {
           </Command>
         </PopoverContent>
       </Popover>
-      <div className="flex w-full flex-col gap-2 md:flex-row">
+      <div className="flex w-full max-w-[400px] flex-col gap-2 md:flex-row">
         <MyInput
           type="number"
           defaultValue={searchParams.get('minPrice') ?? ''}
           onChange={(e) => {
             debouncedSearchParams(e.target.value, 'minPrice');
           }}
-          placeholder="Min. price"
+          placeholder="Min. qiymət"
           className="w-full"
         />
         <MyInput
@@ -462,7 +461,7 @@ export function Filter() {
           onChange={(e) => {
             debouncedSearchParams(e.target.value, 'maxPrice');
           }}
-          placeholder="Max. price"
+          placeholder="Max. qiymət"
           className="w-full"
         />
       </div>
