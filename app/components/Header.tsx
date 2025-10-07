@@ -58,7 +58,7 @@ export function Header() {
         <div
           className={cn({
             'absolute top-[calc(100%+1px)] left-0 z-0 flex w-full -translate-y-full flex-col items-center justify-center gap-6 overflow-hidden border-b border-gray-200 bg-white pt-2 pb-8 transition md:hidden': true,
-            '-translate-y-px': isOpen,
+            '-translate-y-0.5': isOpen,
           })}
         >
           <Link

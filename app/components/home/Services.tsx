@@ -22,7 +22,7 @@ export function Services() {
         className="mb-10"
       >
         <Link
-          to="#"
+          to="/find-manual"
           className="group flex items-center gap-2"
         >
           <div>Bütün xidmətlərə bax</div>

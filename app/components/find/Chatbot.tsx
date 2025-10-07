@@ -1,8 +1,8 @@
 import { ArrowUp, Paperclip, Trash2 } from 'lucide-react';
 import { useRef, useState, type ChangeEvent, type KeyboardEvent } from 'react';
 import { Button } from 'react-aria-components';
-import toast from 'react-hot-toast';
 import { useFetcher } from 'react-router';
+import { toast } from 'sonner';
 import { GetFileIcon } from '~/components/find/GetFileIcon';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 import { cn } from '~/libs/cn';
