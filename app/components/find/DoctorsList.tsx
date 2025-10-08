@@ -2,12 +2,13 @@ import { distance, point } from '@turf/turf';
 import { useQueryState } from 'nuqs';
 import { useContext } from 'react';
 import { useFetcher } from 'react-router';
-import { toast } from 'sonner';
 import { DoctorsContext } from '~/components/find/DoctorsContext';
 import { DoctorListCard } from '~/components/molecules/DoctorListCard';
 import { DoctorCardListSkeleton } from '~/components/skeletons/DoctorCardListSkeleton';
 import { useMyLocationStore } from '~/store/useMyLocation';
 import { useSelectedDoctor } from '~/store/useSelectedDoctor';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import emptyDotLottie from '~/assets/lottie-animations/empty.lottie?url';
 
 export function DoctorsList() {
   const fetcher = useFetcher({ key: 'msg-to-ai' });
@@ -71,6 +72,15 @@ export function DoctorsList() {
               />
             );
           })}
+          {sortedData.length === 0 && (
+            <div className="grid h-full w-full place-content-center">
+              <DotLottieReact
+                src={emptyDotLottie}
+                loop
+                autoplay
+              />
+            </div>
+          )}
         </div>
       )}
       {fetcher.state !== 'idle' && (
