@@ -1,4 +1,3 @@
-import { AdvancedMarker, APIProvider, Map, useMap } from '@vis.gl/react-google-maps';
 import { Locate, LocateFixed, MapPinned, X } from 'lucide-react';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
@@ -6,11 +5,12 @@ import { DoctorsContext } from '~/components/find/DoctorsContext';
 import { cn } from '~/libs/cn';
 import { useMyLocationStore } from '~/store/useMyLocation';
 import { useSelectedDoctor } from '~/store/useSelectedDoctor';
+import { AdvancedMarker, APIProvider, Map, useMap } from '@vis.gl/react-google-maps';
 
 const DEFAULT_CORDS = { lat: 40.39663013477836, lng: 49.86679038442161 };
 
-function GeoPanToUser() {
-  const map = useMap();
+function GeoPanToUser({ mapId }: { mapId: string }) {
+  const map = useMap(mapId);
   const myLocation = useMyLocationStore((state) => state.myLocation);
   const setMyLocation = useMyLocationStore((state) => state.setMyLocation);
 
@@ -106,10 +106,11 @@ export function DoctorsMap() {
     <APIProvider apiKey={'AIzaSyDW3qNqDT4ZrF6E3uIoGQOHdB8qhIXkQaE'}>
       <div className="hidden md:block">
         <div className="relative md:sticky md:top-4">
-          <GeoPanToUser />
+          <GeoPanToUser mapId="pcMap" />
           <div className="h-[400px] w-full overflow-hidden rounded-xl bg-gray-500">
             <Map
-              mapId={'map'}
+              mapId={'pcMap'}
+              id="pcMap"
               defaultCenter={DEFAULT_CORDS}
               defaultZoom={13}
               gestureHandling="greedy"
@@ -163,10 +164,11 @@ export function DoctorsMap() {
             'fixed bottom-0 left-1/2 z-10 h-[400px] w-[calc(100vw-40px)] -translate-x-1/2 rounded-xl border border-gray-200 bg-white p-4 opacity-100': true,
           })}
         >
-          <GeoPanToUser />
+          <GeoPanToUser mapId="phoneMap" />
           <div className="h-[320px] w-full overflow-hidden rounded-md bg-gray-500">
             <Map
-              mapId={'map'}
+              mapId={'phoneMap'}
+              id="phoneMap"
               defaultCenter={DEFAULT_CORDS}
               defaultZoom={13}
               gestureHandling="greedy"
