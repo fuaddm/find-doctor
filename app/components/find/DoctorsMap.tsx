@@ -1,5 +1,5 @@
 import { AdvancedMarker, APIProvider, Map, useMap } from '@vis.gl/react-google-maps';
-import { Locate, LocateFixed, MapPinned } from 'lucide-react';
+import { Locate, LocateFixed, MapPinned, X } from 'lucide-react';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { DoctorsContext } from '~/components/find/DoctorsContext';
@@ -137,12 +137,60 @@ export function DoctorsMap() {
       </div>
       <div
         onClick={() => setIsSmallMapOpen((prev) => !prev)}
+        className="fixed bottom-8 left-1/2 z-100 h-14 w-14 -translate-x-1/2 rounded-[30px] border-2 border-gray-200 bg-teal-500 md:hidden"
+      >
+        <MapPinned
+          className={cn({
+            'absolute top-1/2 left-1/2 -translate-1/2 stroke-teal-50 opacity-100 transition': true,
+            '-rotate-180 opacity-0': isSmallMapOpen,
+          })}
+        />
+        <X
+          className={cn({
+            'absolute top-1/2 left-1/2 -translate-1/2 rotate-180 stroke-teal-50 opacity-0 transition': true,
+            'rotate-0 opacity-100': isSmallMapOpen,
+          })}
+        />
+      </div>
+      <div
         className={cn({
-          'fixed bottom-12 left-1/2 grid h-14 w-14 -translate-x-1/2 translate-y-4 place-content-center rounded-[30px] bg-teal-500 shadow-[0px_0px_2px_1px_rgba(0,0,0,0.1)] transition-all md:hidden': true,
-          'h-[400px] w-[calc(100%-32px)] translate-y-0 rounded-lg': isSmallMapOpen,
+          'fixed bottom-8 left-1/2 z-99 h-0 w-0 -translate-x-1/2 overflow-hidden transition-all md:hidden': true,
+          'h-[400px] w-[calc(100%-40px)] -translate-y-16': isSmallMapOpen,
         })}
       >
-        {!isSmallMapOpen && <MapPinned className="stroke-teal-50" />}
+        <div
+          className={cn({
+            'fixed bottom-0 left-1/2 z-10 h-[400px] w-[calc(100vw-40px)] -translate-x-1/2 rounded-xl border border-gray-200 bg-white p-4 opacity-100': true,
+          })}
+        >
+          <GeoPanToUser />
+          <div className="h-[320px] w-full overflow-hidden rounded-md bg-gray-500">
+            <Map
+              mapId={'map'}
+              defaultCenter={DEFAULT_CORDS}
+              defaultZoom={13}
+              gestureHandling="greedy"
+              disableDefaultUI={false}
+              mapTypeControl={false}
+            >
+              <FitToMarkers doctors={data} />
+
+              {data.map((doctor: any) => {
+                return (
+                  <AdvancedMarker
+                    key={doctor.id + 'marker'}
+                    position={{ lat: doctor.hospital.lat, lng: doctor.hospital.long }}
+                  ></AdvancedMarker>
+                );
+              })}
+              {myLocation && (
+                <AdvancedMarker position={myLocation}>
+                  <div className="h-3 w-3 rounded-full border-1 border-white bg-blue-500 shadow-[0px_0px_0px_3px_rgba(43,127,255,0.5)]"></div>
+                </AdvancedMarker>
+              )}
+            </Map>
+          </div>
+        </div>
       </div>
     </APIProvider>
   );
