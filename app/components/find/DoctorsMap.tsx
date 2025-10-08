@@ -50,7 +50,7 @@ function GeoPanToUser() {
   return (
     <div>
       <button
-        className="mb-2 flex w-full items-center justify-center gap-2 rounded-md bg-teal-700 py-2 text-center text-white"
+        className="mb-2 flex w-full items-center justify-center gap-2 rounded-md bg-teal-700 py-2 text-center text-white transition hover:bg-teal-700/90"
         onClick={() => setMapToCenter()}
       >
         {myLocation !== null ? <LocateFixed size={18} /> : <Locate size={18} />}

@@ -29,7 +29,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   try {
     const data = await resp.json();
     if (data.length === 1 && typeof data[0] === 'object' && !('doctor' in data[0])) return [];
-    return data;
+    return data.slice(0, 15);
   } catch {
     return [];
   }
@@ -42,7 +42,7 @@ export default function FindManualPage() {
   return (
     <div className="container py-10 pb-40">
       <Filter />
-      <DoctorsContext value={doctors.slice(0, 15)}>
+      <DoctorsContext value={doctors}>
         <Doctors />
       </DoctorsContext>
     </div>

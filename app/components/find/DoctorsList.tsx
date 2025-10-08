@@ -26,8 +26,7 @@ export function DoctorsList() {
   } else if (sort === 'experience') {
     sortedData = [...data].sort((a, b) => b.experience_years - a.experience_years);
   } else if (sort === 'distance') {
-    if (!myLocation) toast.error('Yer məlumatı hal-hazırda əlçatmazdır');
-    else {
+    if (myLocation) {
       sortedData = data.map((doctor: any) => {
         const from = point([myLocation.lat, myLocation.lng]);
         const to = point([doctor.hospital.lat, doctor.hospital.long]);
@@ -66,6 +65,7 @@ export function DoctorsList() {
                 lng={doctor.hospital.long}
                 distance={km}
                 workHours={doctor.is_saatlari}
+                experienceYears={doctor.experience_years}
                 specialty={doctor.profession.name}
                 isSelected={doctorId === doctor.id}
               />

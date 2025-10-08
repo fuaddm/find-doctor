@@ -179,3 +179,25 @@ body {
     opacity: 0.7;
   }
 }
+
+.doctorDetailModal {
+  left: var(--left);
+  top: 20px;
+  height: calc(100% - 60px);
+  width: calc(100% - (2 * var(--left)));
+  animation: doctorDetailModalAnimation 0.2s ease-in;
+}
+
+@keyframes doctorDetailModalAnimation {
+  from {
+    top: var(--top);
+    left: var(--left);
+    width: var(--width);
+    height: var(--height);
+  }
+  to {
+    width: calc(100% - (2 * var(--left)));
+    top: 20px;
+    height: calc(100% - 60px);
+  }
+}

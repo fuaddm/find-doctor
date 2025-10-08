@@ -6,6 +6,7 @@ import { Button } from '~/components/ui/button';
 import { Command, CommandGroup, CommandItem, CommandList } from '~/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
 import { cn } from '~/libs/cn';
+import { useMyLocationStore } from '~/store/useMyLocation';
 
 const sorts = [
   {
@@ -30,6 +31,8 @@ export function Sort() {
   const data = useContext(DoctorsContext);
   const [value, setValue] = useQueryState('sort');
   const [open, setOpen] = useState(false);
+
+  const myLocation = useMyLocationStore((state) => state.myLocation);
 
   useEffect(() => {
     if (data.length === 0) setValue(null);
@@ -65,6 +68,7 @@ export function Sort() {
                 <CommandItem
                   key={sort.value}
                   value={sort.value}
+                  disabled={sort.value === 'distance' && !myLocation}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? null : currentValue);
                     setOpen(false);
