@@ -37,7 +37,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 export default function FindManualPage() {
   const loaderData = useLoaderData();
-  const doctors = loaderData.map((item) => item.doctor);
+  const doctors = loaderData.map((item: any) => item.doctor);
 
   return (
     <div className="container py-10 pb-40">
