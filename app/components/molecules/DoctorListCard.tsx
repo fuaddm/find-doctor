@@ -1,8 +1,9 @@
-import { Clock, HandCoins, Hospital, Map, Maximize2, Navigation, X } from 'lucide-react';
+import { Clock, HandCoins, Hospital, Map, Maximize2, Navigation, Pin, X } from 'lucide-react';
 import MaleSvg from '~/assets/male.svg';
 import FemaleSvg from '~/assets/female.svg';
 import { useEffect, useRef, useState, type HTMLProps } from 'react';
 import { cn } from '~/libs/cn';
+import doctorLandscape from '~/assets/doctor-landscape.webp';
 
 export interface DoctorList {
   full_name: string;
@@ -36,36 +37,27 @@ export function DoctorListCard({
   isSelected,
   ...props
 }: DoctorList & HTMLProps<HTMLDivElement>) {
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
   const [image, setImage] = useState(img ? img : gender === 'Female' ? FemaleSvg : MaleSvg);
-  const [rect, setRect] = useState<DOMRect | null>(null);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (full_name === 'Aqil Şıxəliyev' && wrapperRef.current) {
-      console.dir(wrapperRef.current?.getBoundingClientRect());
-    }
     if (open) {
       document.body.style.overflow = 'hidden';
       if (document.body.offsetWidth > 768) {
         document.body.style.paddingRight = '15px';
       }
     } else {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
+      setTimeout(() => {
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+      }, 250);
     }
   }, [open]);
-
-  function setRectData() {
-    if (wrapperRef.current) setRect(wrapperRef.current.getBoundingClientRect());
-    setOpen(true);
-  }
 
   return (
     <>
       <div className="flex gap-1">
         <div
-          ref={wrapperRef}
           className={cn({
             'group w-full rounded-xl border border-gray-200 bg-transparent p-3 transition duration-50 ease-out': true,
             'border-white bg-teal-500': isSelected,
@@ -211,7 +203,7 @@ export function DoctorListCard({
         </div>
         <div className="grid grid-rows-2 gap-1">
           <button
-            onClick={setRectData}
+            onClick={() => setOpen(true)}
             className="grid place-items-center rounded-lg bg-teal-600 px-3 transition hover:bg-teal-600/90"
           >
             <Maximize2
@@ -235,33 +227,55 @@ export function DoctorListCard({
       <div
         onClick={() => setOpen(false)}
         className={cn({
-          'invisible fixed top-0 left-0 z-1000 h-full w-full bg-black/40 opacity-0 transition': true,
+          'invisible fixed top-0 left-0 z-1000 h-full w-full bg-black/40 opacity-0 transition-all': true,
           'visible opacity-100': open,
         })}
       ></div>
       <div
-        style={
-          {
-            '--top': `${rect?.y}px`,
-            '--left': `${rect?.x}px`,
-            '--width': `${rect?.width}px`,
-            '--height': `${rect?.height}px`,
-          } as React.CSSProperties
-        }
         className={cn({
-          'invisible fixed z-1001 container rounded-xl border border-gray-200 bg-white p-3': true,
-          'doctorDetailModal visible': open,
+          'pointer-events-none invisible fixed top-0 left-1/2 z-1001 container h-full w-full -translate-x-1/2': true,
+          visible: open,
         })}
       >
-        <button
-          onClick={() => setOpen(false)}
-          className="absolute top-2 right-2 rounded-md p-2 transition hover:bg-gray-100 md:top-3 md:right-3"
+        <div
+          className={cn({
+            'pointer-events-auto invisible relative z-1001 container mt-5 h-full max-h-[calc(100%-60px)] w-full overflow-y-auto rounded-xl border border-gray-200 bg-white p-3 pt-3 opacity-0 transition-all duration-250': true,
+            'visible opacity-100': open,
+          })}
         >
-          <X
-            size={24}
-            className="text-gray-500"
-          />
-        </button>
+          <button
+            onClick={() => setOpen(false)}
+            className="absolute top-4 right-4 z-10 rounded-md bg-white/50 p-2 transition hover:bg-white"
+          >
+            <X
+              size={24}
+              className="text-gray-700"
+            />
+          </button>
+          <div className="relative z-0 mb-10 md:mb-24">
+            <div className="h-[100px] overflow-hidden rounded-md bg-gray-400 md:h-[240px]">
+              <img
+                src={doctorLandscape}
+                className="h-full w-full object-cover"
+                alt=""
+              />
+            </div>
+            <div className="absolute bottom-0 left-1/2 aspect-square w-20 -translate-x-1/2 translate-y-1/2 overflow-hidden rounded-full border-4 border-white bg-gray-400 md:w-40 md:border-6">
+              <img
+                src={image}
+                onError={() => setImage(gender === 'Female' ? FemaleSvg : MaleSvg)}
+                alt=""
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+          <div className="text-center text-xl font-semibold md:mb-2 md:text-4xl">{full_name}</div>
+          <div className="mb-2 text-center text-base text-gray-500 md:text-lg">{specialty}</div>
+          <div className="mx-auto flex w-fit items-center gap-1 rounded-md border border-teal-600 bg-teal-600/20 px-2 py-1 text-teal-600 md:px-3 md:py-2">
+            <Pin className="aspect-square w-4 md:w-5" />
+            <div className="text-xs md:text-sm">{address}</div>
+          </div>
+        </div>
       </div>
     </>
   );

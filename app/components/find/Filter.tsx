@@ -165,7 +165,7 @@ export function Filter() {
   const debouncedSearchParams = debounce(setParamForPrice, 500);
 
   return (
-    <div className="mb-10 flex flex-col gap-2 overflow-auto py-1 md:flex-row md:gap-3">
+    <div className="mb-10 flex flex-col gap-2 py-1 md:flex-row md:gap-3">
       <Popover
         open={open}
         onOpenChange={setOpen}

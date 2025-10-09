@@ -39,32 +39,32 @@ export function Services() {
       </SectionHeader>
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
         <Card
-          to="#"
+          to="/find-manual?profession=42"
           title="Kardioloq"
           img={cardiologyPic}
         />
         <Card
-          to="#"
+          to="/find-manual?profession=66"
           title="Pediatr"
           img={pediatricsPic}
         />
         <Card
-          to="#"
+          to="/find-manual?profession=56"
           title="Nevroloq"
           img={neurologyPic}
         />
         <Card
-          to="#"
+          to="/find-manual?profession=2"
           title="Ailə Təbabəti"
           img={generalCarePic}
         />
         <Card
-          to="#"
+          to="/find-manual?profession=64"
           title="Ortoped"
           img={ostPic}
         />
         <Card
-          to="#"
+          to="/find-manual?profession=77"
           title="Qastroenteroloq"
           img={gastPic}
         />

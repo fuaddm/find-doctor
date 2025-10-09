@@ -10,7 +10,7 @@ export function Intro() {
   return (
     <div
       id="about"
-      className="container pt-10 pb-10 md:pt-2"
+      className="container pt-10 pb-10 md:pt-12"
     >
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center md:gap-20">
         <div>
@@ -126,7 +126,7 @@ export function Intro() {
         </div>
         <div className="flex justify-center md:justify-end">
           <Link
-            to="#"
+            to="/find-manual?profession=74"
             className="group/card relative block aspect-[1/1.2] w-full max-w-[420px]"
           >
             <div className="absolute top-0 left-0 z-0 h-full w-full -translate-x-8 translate-y-4 -rotate-4 rounded-3xl bg-gradient-to-b from-gray-100 to-transparent"></div>
