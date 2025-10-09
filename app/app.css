@@ -184,8 +184,21 @@ body {
   left: var(--left);
   top: 20px;
   height: calc(100% - 60px);
-  width: calc(100% - (2 * var(--left)));
-  animation: doctorDetailModalAnimation 0.2s ease-in;
+  width: calc(100% - (2 * var(--left) + 15px));
+  animation: doctorDetailModalAnimation 250ms ease-in-out;
+}
+.doctorCardExpanded {
+  position: absolute;
+  left: var(--left);
+  top: 20px;
+  height: calc(100% - 60px);
+  width: calc(100% - (2 * var(--left) + 15px));
+}
+
+@media (max-width: 768px) {
+  .doctorDetailModal {
+    width: calc(100% - (2 * var(--left)));
+  }
 }
 
 @keyframes doctorDetailModalAnimation {

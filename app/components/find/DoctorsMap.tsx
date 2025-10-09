@@ -161,7 +161,8 @@ export function DoctorsMap() {
       >
         <div
           className={cn({
-            'fixed bottom-0 left-1/2 z-10 h-[400px] w-[calc(100vw-40px)] -translate-x-1/2 rounded-xl border border-gray-200 bg-white p-4 opacity-100': true,
+            'fixed bottom-0 left-1/2 z-10 h-[400px] w-[calc(100vw-40px)] -translate-x-1/2 rounded-xl border border-gray-200 bg-white p-4 opacity-100 transition': true,
+            'opacity-0': !isSmallMapOpen,
           })}
         >
           <GeoPanToUser mapId="phoneMap" />

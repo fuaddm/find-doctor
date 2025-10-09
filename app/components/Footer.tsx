@@ -7,9 +7,13 @@ export function Footer() {
       <div className="flex max-w-[400px] flex-col gap-5">
         <Link
           to="/"
-          className="w-fit"
+          className="h-[60px] w-[100px]"
         >
-          logo
+          <img
+            className="h-full w-full object-contain"
+            src="/logo.svg"
+            alt=""
+          />
         </Link>
         <div className="text-lg font-medium text-gray-500">
           Yeniliklər və son paylaşımlardan xəbərdar qalmaq üçün bizi sosial şəbəkələrdə izləyin

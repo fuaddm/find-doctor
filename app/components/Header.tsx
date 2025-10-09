@@ -16,9 +16,13 @@ export function Header() {
           <div className="container flex items-center justify-between py-6">
             <Link
               to="/"
-              className="w-fit"
+              className="h-[60px] w-[100px]"
             >
-              logo
+              <img
+                className="h-full w-full object-contain"
+                src="/logo.svg"
+                alt=""
+              />
             </Link>
             <nav className="hidden items-center gap-5 md:flex">
               <Link to="/#about">
