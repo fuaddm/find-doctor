@@ -1,7 +1,7 @@
 import { Clock, HandCoins, Hospital, Map, Maximize2, Navigation, Pin, X } from 'lucide-react';
 import MaleSvg from '~/assets/male.svg';
 import FemaleSvg from '~/assets/female.svg';
-import { useEffect, useRef, useState, type HTMLProps } from 'react';
+import { useEffect, useState, type HTMLProps } from 'react';
 import { cn } from '~/libs/cn';
 import doctorLandscape from '~/assets/doctor-landscape.webp';
 
@@ -91,7 +91,7 @@ export function DoctorListCard({
                 </div>
                 <div
                   className={cn({
-                    'flex h-fit items-center gap-1 rounded-full bg-green-500 px-2 py-0.25': true,
+                    'flex h-fit items-center gap-1 rounded-full bg-green-600 px-2 py-0.25': true,
                     'bg-teal-100': isSelected,
                   })}
                 >
@@ -239,7 +239,7 @@ export function DoctorListCard({
       >
         <div
           className={cn({
-            'pointer-events-auto invisible relative z-1001 container mt-5 h-full max-h-[calc(100%-60px)] w-full overflow-y-auto rounded-xl border border-gray-200 bg-white p-3 pt-3 opacity-0 transition-all duration-250': true,
+            'pointer-events-auto invisible relative z-1001 container mt-5 h-full max-h-[calc(100%-60px)] w-full overflow-y-auto rounded-xl border border-gray-200 bg-white p-3 opacity-0 transition-all duration-250': true,
             'visible opacity-100': open,
           })}
         >
@@ -252,15 +252,15 @@ export function DoctorListCard({
               className="text-gray-700"
             />
           </button>
-          <div className="relative z-0 mb-10 md:mb-24">
-            <div className="h-[100px] overflow-hidden rounded-md bg-gray-400 md:h-[240px]">
+          <div className="relative z-0 mb-10 md:mb-15">
+            <div className="h-[100px] overflow-hidden rounded-md bg-gray-400 md:h-[160px]">
               <img
                 src={doctorLandscape}
                 className="h-full w-full object-cover"
                 alt=""
               />
             </div>
-            <div className="absolute bottom-0 left-1/2 aspect-square w-20 -translate-x-1/2 translate-y-1/2 overflow-hidden rounded-full border-4 border-white bg-gray-400 md:w-40 md:border-6">
+            <div className="absolute bottom-0 left-1/2 aspect-square w-20 -translate-x-1/2 translate-y-1/2 overflow-hidden rounded-full border-4 border-white bg-gray-400 md:w-28 md:border-4">
               <img
                 src={image}
                 onError={() => setImage(gender === 'Female' ? FemaleSvg : MaleSvg)}
@@ -269,10 +269,10 @@ export function DoctorListCard({
               />
             </div>
           </div>
-          <div className="text-center text-xl font-semibold md:mb-2 md:text-4xl">{full_name}</div>
+          <div className="text-center text-xl font-semibold md:mb-1 md:text-2xl">{full_name}</div>
           <div className="mb-2 text-center text-base text-gray-500 md:text-lg">{specialty}</div>
-          <div className="mx-auto flex w-fit items-center gap-1 rounded-md border border-teal-600 bg-teal-600/20 px-2 py-1 text-teal-600 md:px-3 md:py-2">
-            <Pin className="aspect-square w-4 md:w-5" />
+          <div className="mx-auto flex w-fit items-center gap-1 rounded-md border border-teal-600 bg-teal-600/10 px-2 py-1 text-teal-600">
+            <Pin className="aspect-square w-4" />
             <div className="text-xs md:text-sm">{address}</div>
           </div>
         </div>

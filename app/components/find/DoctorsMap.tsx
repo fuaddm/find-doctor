@@ -6,6 +6,8 @@ import { cn } from '~/libs/cn';
 import { useMyLocationStore } from '~/store/useMyLocation';
 import { useSelectedDoctor } from '~/store/useSelectedDoctor';
 import { AdvancedMarker, APIProvider, Map, useMap } from '@vis.gl/react-google-maps';
+import MaleSvg from '~/assets/male.svg';
+import FemaleSvg from '~/assets/female.svg';
 
 const DEFAULT_CORDS = { lat: 40.39663013477836, lng: 49.86679038442161 };
 
@@ -75,7 +77,7 @@ function FitToMarkers({ doctors }: { doctors: Array<any> }) {
 
     if (positions.length === 1) {
       map.setCenter(positions[0]);
-      map.setZoom(14);
+      map.setZoom(17);
       return;
     }
 
@@ -89,7 +91,7 @@ function FitToMarkers({ doctors }: { doctors: Array<any> }) {
       const doctor = doctors.find((doctor) => doctor.id === doctorId);
       if (map && doctor) {
         map.panTo({ lat: doctor.hospital.lat, lng: doctor.hospital.long });
-        map.setZoom(14);
+        map.setZoom(17);
       }
     }
   }, [doctorId]);
@@ -101,6 +103,7 @@ export function DoctorsMap() {
   const data = useContext(DoctorsContext);
   const myLocation = useMyLocationStore((state) => state.myLocation);
   const [isSmallMapOpen, setIsSmallMapOpen] = useState(false);
+  const doctorId = useSelectedDoctor((state) => state.doctorId);
 
   return (
     <APIProvider apiKey={'AIzaSyDW3qNqDT4ZrF6E3uIoGQOHdB8qhIXkQaE'}>
@@ -124,7 +127,37 @@ export function DoctorsMap() {
                   <AdvancedMarker
                     key={doctor.id + 'marker'}
                     position={{ lat: doctor.hospital.lat, lng: doctor.hospital.long }}
-                  ></AdvancedMarker>
+                    zIndex={doctorId === doctor.id ? 100 : 0}
+                  >
+                    <div className="relative z-0 flex cursor-pointer flex-col items-center gap-1">
+                      <svg
+                        fill="var(--color-teal-600)"
+                        width="48px"
+                        height="48px"
+                        viewBox="0 0 8 8"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="relative z-10"
+                      >
+                        <path
+                          d="M3 0c-1.66 0-3 1.34-3 3 0 2 3 5 3 5s3-3 3-5c0-1.66-1.34-3-3-3zm0 1c1.11 0 2 .9 2 2 0 1.11-.89 2-2 2-1.1 0-2-.89-2-2 0-1.1.9-2 2-2z"
+                          transform="translate(1)"
+                        />
+                      </svg>
+                      {doctorId === doctor.id && (
+                        <div className="relative">
+                          <div className="aspect-square w-2 rounded-full bg-teal-500"></div>
+                          <div className="absolute top-1/2 left-1/2 aspect-square w-12 -translate-1/2 rounded-full border border-teal-500 bg-teal-500/30"></div>
+                        </div>
+                      )}
+                      <div className="absolute top-1.25 left-2.75 aspect-square w-6.5 overflow-hidden rounded-full bg-gray-500">
+                        <img
+                          src={doctor.img ? doctor.img : doctor.gender === 'Female' ? FemaleSvg : MaleSvg}
+                          alt=""
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  </AdvancedMarker>
                 );
               })}
               {myLocation && (
@@ -183,7 +216,37 @@ export function DoctorsMap() {
                   <AdvancedMarker
                     key={doctor.id + 'marker'}
                     position={{ lat: doctor.hospital.lat, lng: doctor.hospital.long }}
-                  ></AdvancedMarker>
+                    zIndex={doctorId === doctor.id ? 100 : 0}
+                  >
+                    <div className="relative z-0 flex cursor-pointer flex-col items-center gap-1">
+                      <svg
+                        fill="var(--color-teal-600)"
+                        width="48px"
+                        height="48px"
+                        viewBox="0 0 8 8"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="relative z-10"
+                      >
+                        <path
+                          d="M3 0c-1.66 0-3 1.34-3 3 0 2 3 5 3 5s3-3 3-5c0-1.66-1.34-3-3-3zm0 1c1.11 0 2 .9 2 2 0 1.11-.89 2-2 2-1.1 0-2-.89-2-2 0-1.1.9-2 2-2z"
+                          transform="translate(1)"
+                        />
+                      </svg>
+                      {doctorId === doctor.id && (
+                        <div className="relative">
+                          <div className="aspect-square w-2 rounded-full bg-teal-500"></div>
+                          <div className="absolute top-1/2 left-1/2 aspect-square w-12 -translate-1/2 rounded-full border border-teal-500 bg-teal-500/30"></div>
+                        </div>
+                      )}
+                      <div className="absolute top-1.25 left-2.75 aspect-square w-6.5 overflow-hidden rounded-full bg-gray-500">
+                        <img
+                          src={doctor.img ? doctor.img : doctor.gender === 'Female' ? FemaleSvg : MaleSvg}
+                          alt=""
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  </AdvancedMarker>
                 );
               })}
               {myLocation && (
