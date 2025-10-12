@@ -3,7 +3,7 @@ import { redirect } from 'react-router';
 
 export async function loader({ request }: Route.ClientActionArgs) {
   const url = new URL(request.url);
-  const accessToken = url.searchParams.get('access_token');
+  const accessToken = url.searchParams.get('id_token');
 
   try {
     const resp = await fetch(
