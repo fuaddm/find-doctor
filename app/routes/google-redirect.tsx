@@ -9,6 +9,8 @@ export async function loader({ request }: Route.ClientActionArgs) {
     const resp = await fetch(
       `https://sublime-cactus-e01a5ec7f1.strapiapp.com/api/connect/google/callback?access_token=${accessToken}`
     );
+    const data = resp.json();
+    console.log(data);
     return redirect('/');
   } catch (e) {
     console.error(e);
