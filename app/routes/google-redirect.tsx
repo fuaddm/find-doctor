@@ -7,7 +7,7 @@ export async function loader({ request }: Route.ClientActionArgs) {
 
   try {
     const resp = await fetch(
-      `https://sublime-cactus-e01a5ec7f1.strapiapp.com/api/auth/google/callback?access_token=${accessToken}`
+      `https://sublime-cactus-e01a5ec7f1.strapiapp.com/api/connect/google/callback?access_token=${accessToken}`
     );
     const data = await resp.json();
     console.log(data);
