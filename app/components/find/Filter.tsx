@@ -162,7 +162,7 @@ export function Filter() {
     });
   }
 
-  const debouncedSearchParams = debounce(setParamForPrice, 500);
+  const debouncedSearchParams = debounce(setParamForPrice, 1000);
 
   return (
     <div className="mb-10 flex flex-col gap-2 py-1 md:flex-row md:gap-3">

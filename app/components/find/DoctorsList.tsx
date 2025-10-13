@@ -12,8 +12,13 @@ import emptyDotLottie from '~/assets/lottie-animations/empty.lottie?url';
 
 export function DoctorsList() {
   const fetcher = useFetcher({ key: 'msg-to-ai' });
+  const getDoctorsFetcher = useFetcher({ key: 'get-doctors' });
+  const loading = fetcher.state !== 'idle' || !getDoctorsFetcher.data || getDoctorsFetcher.state === 'loading';
+
   const data = useContext(DoctorsContext);
+
   let sortedData = [];
+
   const doctorId = useSelectedDoctor((state) => state.doctorId);
   const setDoctorId = useSelectedDoctor((state) => state.setDoctorId);
   const myLocation = useMyLocationStore((state) => state.myLocation);
@@ -43,7 +48,7 @@ export function DoctorsList() {
 
   return (
     <div>
-      {fetcher.state === 'idle' && (
+      {!loading && (
         <div className="flex flex-col gap-2">
           {sortedData.map((doctor: any) => {
             let km = null;
@@ -73,17 +78,24 @@ export function DoctorsList() {
             );
           })}
           {sortedData.length === 0 && (
-            <div className="grid h-full w-full place-content-center">
-              <DotLottieReact
-                src={emptyDotLottie}
-                loop
-                autoplay
-              />
+            <div className="grid w-full place-content-center">
+              <div className="h-[200px] w-full max-w-[300px]">
+                <DotLottieReact
+                  src={emptyDotLottie}
+                  loop
+                  autoplay
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                  }}
+                />
+              </div>
             </div>
           )}
         </div>
       )}
-      {fetcher.state !== 'idle' && (
+      {loading && (
         <div className="flex flex-col gap-2">
           <DoctorCardListSkeleton />
           <DoctorCardListSkeleton />
