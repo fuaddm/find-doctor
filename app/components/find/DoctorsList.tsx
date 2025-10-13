@@ -1,7 +1,6 @@
 import { distance, point } from '@turf/turf';
 import { useQueryState } from 'nuqs';
 import { useContext } from 'react';
-import { useFetcher } from 'react-router';
 import { DoctorsContext } from '~/components/find/DoctorsContext';
 import { DoctorListCard } from '~/components/molecules/DoctorListCard';
 import { DoctorCardListSkeleton } from '~/components/skeletons/DoctorCardListSkeleton';
@@ -11,11 +10,7 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import emptyDotLottie from '~/assets/lottie-animations/empty.lottie?url';
 
 export function DoctorsList() {
-  const fetcher = useFetcher({ key: 'msg-to-ai' });
-  const getDoctorsFetcher = useFetcher({ key: 'get-doctors' });
-  const loading = fetcher.state !== 'idle' || !getDoctorsFetcher.data || getDoctorsFetcher.state === 'loading';
-
-  const data = useContext(DoctorsContext);
+  const { data, loading } = useContext(DoctorsContext);
 
   let sortedData = [];
 

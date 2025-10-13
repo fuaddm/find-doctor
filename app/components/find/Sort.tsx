@@ -28,7 +28,7 @@ const sorts = [
 ];
 
 export function Sort() {
-  const data = useContext(DoctorsContext);
+  const { data } = useContext(DoctorsContext);
   const [value, setValue] = useQueryState('sort');
   const [open, setOpen] = useState(false);
 

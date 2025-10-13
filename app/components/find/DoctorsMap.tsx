@@ -100,7 +100,7 @@ function FitToMarkers({ doctors }: { doctors: Array<any> }) {
 }
 
 export function DoctorsMap() {
-  const data = useContext(DoctorsContext);
+  const { data } = useContext(DoctorsContext);
   const myLocation = useMyLocationStore((state) => state.myLocation);
   const [isSmallMapOpen, setIsSmallMapOpen] = useState(false);
   const doctorId = useSelectedDoctor((state) => state.doctorId);

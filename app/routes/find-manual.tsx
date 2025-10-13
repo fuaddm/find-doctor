@@ -19,7 +19,7 @@ export default function FindManualPage() {
   return (
     <div className="container py-10 pb-40">
       <Filter />
-      <DoctorsContext value={doctors}>
+      <DoctorsContext value={{ data: doctors, loading: !fetcher.data || fetcher.state === 'loading' }}>
         <Doctors />
       </DoctorsContext>
     </div>

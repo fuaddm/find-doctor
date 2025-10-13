@@ -39,7 +39,7 @@ export default function FindPage() {
   return (
     <div className="container py-10 pb-40">
       <Chatbot />
-      <DoctorsContext value={fetcher.data ?? []}>
+      <DoctorsContext value={{ data: fetcher.data ?? [], loading: fetcher.state === 'loading' }}>
         <Doctors />
       </DoctorsContext>
     </div>
