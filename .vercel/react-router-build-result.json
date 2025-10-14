@@ -1,0 +1,183 @@
+{
+  "buildManifest": {
+    "serverBundles": {
+      "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0": {
+        "id": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+        "file": "build/server/nodejs_eyJydW50aW1lIjoibm9kZWpzIn0/index.js",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    },
+    "routeIdToServerBundleId": {
+      "routes/home": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/find": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/find-manual": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/get-doctors": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/google-redirect": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/me": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "app/root.tsx",
+        "path": "",
+        "config": {}
+      },
+      "routes/home": {
+        "id": "routes/home",
+        "parentId": "root",
+        "file": "app/routes/home.tsx",
+        "index": true,
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/find": {
+        "id": "routes/find",
+        "parentId": "root",
+        "file": "app/routes/find.tsx",
+        "path": "find",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/find-manual": {
+        "id": "routes/find-manual",
+        "parentId": "root",
+        "file": "app/routes/find-manual.tsx",
+        "path": "find-manual",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/get-doctors": {
+        "id": "routes/get-doctors",
+        "parentId": "root",
+        "file": "app/routes/get-doctors.tsx",
+        "path": "get-doctors",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/google-redirect": {
+        "id": "routes/google-redirect",
+        "parentId": "root",
+        "file": "app/routes/google-redirect.tsx",
+        "path": "connect/google/redirect",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/me": {
+        "id": "routes/me",
+        "parentId": "root",
+        "file": "app/routes/me.tsx",
+        "path": "me",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    }
+  },
+  "reactRouterConfig": {
+    "appDirectory": "C:/Users/fuad/Desktop/CODE/WEB/ACTIVE_PROJECTS/find-doctor/app",
+    "basename": "/",
+    "buildDirectory": "C:/Users/fuad/Desktop/CODE/WEB/ACTIVE_PROJECTS/find-doctor/build",
+    "future": {
+      "v8_middleware": true,
+      "unstable_optimizeDeps": false,
+      "unstable_splitRouteModules": false,
+      "unstable_subResourceIntegrity": false,
+      "unstable_viteEnvironmentApi": false
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "root.tsx",
+        "path": ""
+      },
+      "routes/home": {
+        "id": "routes/home",
+        "parentId": "root",
+        "file": "routes/home.tsx",
+        "index": true
+      },
+      "routes/find": {
+        "id": "routes/find",
+        "parentId": "root",
+        "file": "routes/find.tsx",
+        "path": "find"
+      },
+      "routes/find-manual": {
+        "id": "routes/find-manual",
+        "parentId": "root",
+        "file": "routes/find-manual.tsx",
+        "path": "find-manual"
+      },
+      "routes/get-doctors": {
+        "id": "routes/get-doctors",
+        "parentId": "root",
+        "file": "routes/get-doctors.tsx",
+        "path": "get-doctors"
+      },
+      "routes/google-redirect": {
+        "id": "routes/google-redirect",
+        "parentId": "root",
+        "file": "routes/google-redirect.tsx",
+        "path": "connect/google/redirect"
+      },
+      "routes/me": {
+        "id": "routes/me",
+        "parentId": "root",
+        "file": "routes/me.tsx",
+        "path": "me"
+      }
+    },
+    "routeDiscovery": {
+      "mode": "lazy",
+      "manifestPath": "/__manifest"
+    },
+    "serverBuildFile": "index.js",
+    "serverModuleFormat": "esm",
+    "ssr": true,
+    "unstable_routeConfig": [
+      {
+        "id": "root",
+        "path": "",
+        "file": "root.tsx",
+        "children": [
+          {
+            "file": "routes/home.tsx",
+            "index": true
+          },
+          {
+            "file": "routes/find.tsx",
+            "path": "find"
+          },
+          {
+            "file": "routes/find-manual.tsx",
+            "path": "find-manual"
+          },
+          {
+            "file": "routes/get-doctors.tsx",
+            "path": "get-doctors"
+          },
+          {
+            "file": "routes/google-redirect.tsx",
+            "path": "connect/google/redirect"
+          },
+          {
+            "file": "routes/me.tsx",
+            "path": "me"
+          }
+        ]
+      }
+    ]
+  },
+  "viteConfig": {
+    "build": {
+      "assetsDir": "assets"
+    }
+  }
+}
