@@ -6,5 +6,4 @@ export default [
   route('find-manual', 'routes/find-manual.tsx'),
   route('get-doctors', 'routes/get-doctors.tsx'),
   route('connect/google/redirect', 'routes/google-redirect.tsx'),
-  route('me', 'routes/me.tsx'),
 ] satisfies RouteConfig;

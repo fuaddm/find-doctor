@@ -2,14 +2,12 @@ import { Menu, User, UserRound } from 'lucide-react';
 import { Button } from 'react-aria-components';
 import { Link } from 'react-router';
 import { TextUpAnimation } from '~/components/fancy/TextUpAnimation';
-import type { AuthUser } from '~/context';
 import { cn } from '~/libs/cn';
 import { useMenuStore } from '~/store/useMenu';
 
-export function Header({ user }: { user: AuthUser | null }) {
+export function Header() {
   const isOpen = useMenuStore((state) => state.isOpen);
   const toggleMenu = useMenuStore((state) => state.toggleMenu);
-  // console.log(user);
 
   return (
     <>
@@ -39,44 +37,18 @@ export function Header({ user }: { user: AuthUser | null }) {
               <Link to="/find">
                 <TextUpAnimation text="AI ilə axtarış" />
               </Link>
-              {!user && (
-                <Link
-                  to="https://sublime-cactus-e01a5ec7f1.strapiapp.com/api/connect/google"
-                  className="group flex items-center gap-2 rounded-full bg-teal-500 px-4 py-2 text-white transition hover:bg-teal-400"
-                >
-                  <span>Giriş et</span>
-                </Link>
-              )}
-              {user && (
-                <Link
-                  to="/me"
-                  className="grid aspect-square w-11 place-content-center rounded-full bg-teal-600"
-                >
-                  <UserRound
-                    size={20}
-                    className="text-white"
-                  />
-                  <div></div>
-                </Link>
-              )}
+              <Link
+                to="https://sublime-cactus-e01a5ec7f1.strapiapp.com/api/connect/google"
+                className="group flex items-center gap-2 rounded-full bg-teal-500 px-4 py-2 text-white transition hover:bg-teal-400"
+              >
+                <span>Giriş et</span>
+              </Link>
             </nav>
             <div
               className={cn({
                 'flex items-center gap-2 md:hidden': true,
               })}
             >
-              {user && (
-                <Link
-                  to="/me"
-                  className="grid aspect-square w-11 place-content-center rounded-full bg-teal-800"
-                >
-                  <UserRound
-                    size={20}
-                    className="text-white"
-                  />
-                  <div></div>
-                </Link>
-              )}
               <Button
                 onPress={toggleMenu}
                 className={cn({
@@ -122,15 +94,13 @@ export function Header({ user }: { user: AuthUser | null }) {
           >
             AI ilə axtarış
           </Link>
-          {!user && (
-            <Link
-              to="https://sublime-cactus-e01a5ec7f1.strapiapp.com/api/connect/google"
-              onClick={toggleMenu}
-              className="group flex items-center gap-2 rounded-full bg-teal-500 px-4 py-2 text-white transition hover:bg-teal-400"
-            >
-              <span>Giriş et</span>
-            </Link>
-          )}
+          <Link
+            to="https://sublime-cactus-e01a5ec7f1.strapiapp.com/api/connect/google"
+            onClick={toggleMenu}
+            className="group flex items-center gap-2 rounded-full bg-teal-500 px-4 py-2 text-white transition hover:bg-teal-400"
+          >
+            <span>Giriş et</span>
+          </Link>
         </div>
       </div>
       <div
