@@ -36,10 +36,15 @@ export async function action({ request }: Route.ClientActionArgs) {
 export default function FindPage() {
   const fetcher = useFetcher({ key: 'msg-to-ai' });
 
+  let loading = false;
+  if (fetcher.state === 'submitting') {
+    loading = true;
+  }
+
   return (
     <div className="container py-10 pb-40">
       <Chatbot />
-      <DoctorsContext value={{ data: fetcher.data ?? [], loading: fetcher.state === 'loading' }}>
+      <DoctorsContext value={{ data: fetcher.data ?? [], loading }}>
         <Doctors />
       </DoctorsContext>
     </div>
