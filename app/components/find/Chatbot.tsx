@@ -125,7 +125,7 @@ export function Chatbot() {
               </label>
             </TooltipTrigger>
             <TooltipContent>
-              <p className="relative z-10">Coming soon</p>
+              <p className="relative z-10">Tezliklə</p>
             </TooltipContent>
           </Tooltip>
           <Button

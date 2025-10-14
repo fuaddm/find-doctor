@@ -5,6 +5,7 @@ import reviewPic2 from '~/assets/review-2.webp';
 import reviewPic3 from '~/assets/review-3.webp';
 import reviewPic4 from '~/assets/review-4.webp';
 import doctorPic from '~/assets/main-doctor.webp';
+import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 
 export function Intro() {
   return (
@@ -40,12 +41,19 @@ export function Intro() {
                   alt=""
                 />
               </div>
-              <div className="absolute top-0 left-0 z-10 grid h-8 w-8 translate-x-[calc(66%*4)] place-items-center overflow-hidden rounded-full border-2 border-teal-700 bg-teal-700 outline-1 outline-teal-700">
-                <Plus
-                  size={20}
-                  className="stroke-white"
-                />
-              </div>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="absolute top-0 left-0 z-10 grid h-8 w-8 translate-x-[calc(66%*4)] place-items-center overflow-hidden rounded-full border-2 border-teal-700 bg-teal-700 outline-1 outline-teal-700">
+                    <Plus
+                      size={20}
+                      className="stroke-white"
+                    />
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p className="relative z-10">Tezliklə</p>
+                </TooltipContent>
+              </Tooltip>
             </div>
             <div className="flex flex-col gap-1">
               <div className="flex gap-0.5">

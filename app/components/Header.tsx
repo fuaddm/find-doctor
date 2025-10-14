@@ -1,13 +1,15 @@
-import { ArrowRight, Menu } from 'lucide-react';
+import { Menu, User, UserRound } from 'lucide-react';
 import { Button } from 'react-aria-components';
 import { Link } from 'react-router';
 import { TextUpAnimation } from '~/components/fancy/TextUpAnimation';
+import type { AuthUser } from '~/context';
 import { cn } from '~/libs/cn';
 import { useMenuStore } from '~/store/useMenu';
 
-export function Header() {
+export function Header({ user }: { user: AuthUser | null }) {
   const isOpen = useMenuStore((state) => state.isOpen);
   const toggleMenu = useMenuStore((state) => state.toggleMenu);
+  // console.log(user);
 
   return (
     <>
@@ -32,31 +34,62 @@ export function Header() {
                 <TextUpAnimation text="Xidmətlər" />
               </Link>
               <Link to="/find-manual">
-                <TextUpAnimation text="Filter" />
+                <TextUpAnimation text="Sadə axtarış" />
               </Link>
-              <Link
-                to="/find"
-                className="group flex items-center gap-2 rounded-full bg-teal-500 px-4 py-2 text-white transition hover:bg-teal-400"
-              >
-                <span>FindDoc-a keç</span>
-                <ArrowRight
-                  size={16}
-                  className="transition group-hover:translate-x-0.75"
-                />
+              <Link to="/find">
+                <TextUpAnimation text="AI ilə axtarış" />
               </Link>
+              {!user && (
+                <Link
+                  to="https://sublime-cactus-e01a5ec7f1.strapiapp.com/api/connect/google"
+                  className="group flex items-center gap-2 rounded-full bg-teal-500 px-4 py-2 text-white transition hover:bg-teal-400"
+                >
+                  <span>Giriş et</span>
+                </Link>
+              )}
+              {user && (
+                <Link
+                  to="/me"
+                  className="grid aspect-square w-11 place-content-center rounded-full bg-teal-600"
+                >
+                  <UserRound
+                    size={20}
+                    className="text-white"
+                  />
+                  <div></div>
+                </Link>
+              )}
             </nav>
-            <Button
-              onPress={toggleMenu}
+            <div
               className={cn({
-                'block aspect-square w-fit rounded-full bg-teal-500 p-3 transition md:hidden': true,
-                'rotate-90': isOpen,
+                'flex items-center gap-2 md:hidden': true,
               })}
             >
-              <Menu
-                size={20}
-                className="stroke-white"
-              />
-            </Button>
+              {user && (
+                <Link
+                  to="/me"
+                  className="grid aspect-square w-11 place-content-center rounded-full bg-teal-800"
+                >
+                  <UserRound
+                    size={20}
+                    className="text-white"
+                  />
+                  <div></div>
+                </Link>
+              )}
+              <Button
+                onPress={toggleMenu}
+                className={cn({
+                  'aspect-square w-fit rounded-full bg-teal-500 p-3 transition': true,
+                  'rotate-90': isOpen,
+                })}
+              >
+                <Menu
+                  size={20}
+                  className="stroke-white"
+                />
+              </Button>
+            </div>
           </div>
         </div>
         <div
@@ -81,19 +114,23 @@ export function Header() {
             to="/find-manual"
             onClick={toggleMenu}
           >
-            Filter
+            Sadə axtarış
           </Link>
           <Link
             to="/find"
             onClick={toggleMenu}
-            className="group flex items-center gap-2 rounded-full bg-teal-600 px-4 py-2 text-white transition hover:bg-teal-500"
           >
-            <span>FindDoc-a keç</span>
-            <ArrowRight
-              size={16}
-              className="transition group-hover:translate-x-0.75"
-            />
+            AI ilə axtarış
           </Link>
+          {!user && (
+            <Link
+              to="https://sublime-cactus-e01a5ec7f1.strapiapp.com/api/connect/google"
+              onClick={toggleMenu}
+              className="group flex items-center gap-2 rounded-full bg-teal-500 px-4 py-2 text-white transition hover:bg-teal-400"
+            >
+              <span>Giriş et</span>
+            </Link>
+          )}
         </div>
       </div>
       <div

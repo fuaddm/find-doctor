@@ -1,4 +1,4 @@
-import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
+import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from 'react-router';
 import { NuqsAdapter } from 'nuqs/adapters/react-router/v7';
 
 import type { Route } from './+types/root';
@@ -6,6 +6,8 @@ import './app.css';
 import { Header } from '~/components/Header';
 import { Footer } from '~/components/Footer';
 import { Toaster } from '~/components/ui/sonner';
+import { authMiddleware } from '~/middleware/auth';
+import { authContext } from '~/context';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -25,7 +27,17 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+export const middleware: Route.MiddlewareFunction[] = [authMiddleware];
+
+export async function loader({ context }: Route.LoaderArgs) {
+  const user = context.get(authContext);
+
+  return { user };
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
+  const { user } = useLoaderData();
+
   return (
     <html lang="az">
       <head>
@@ -38,7 +50,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Header />
+        <Header user={user} />
         {children}
         <Footer />
         <Toaster

@@ -104,6 +104,7 @@ export function DoctorsMap() {
   const myLocation = useMyLocationStore((state) => state.myLocation);
   const [isSmallMapOpen, setIsSmallMapOpen] = useState(false);
   const doctorId = useSelectedDoctor((state) => state.doctorId);
+  const setDoctorId = useSelectedDoctor((state) => state.setDoctorId);
 
   return (
     <APIProvider apiKey={'AIzaSyDW3qNqDT4ZrF6E3uIoGQOHdB8qhIXkQaE'}>
@@ -128,10 +129,11 @@ export function DoctorsMap() {
                     key={doctor.id + 'marker'}
                     position={{ lat: doctor.hospital.lat, lng: doctor.hospital.long }}
                     zIndex={doctorId === doctor.id ? 100 : 0}
+                    onClick={() => setDoctorId(doctor.id)}
                   >
-                    <div className="relative z-0 flex cursor-pointer flex-col items-center gap-1">
+                    <div className="relative z-0 cursor-pointer">
                       <svg
-                        fill="var(--color-teal-600)"
+                        fill="var(--color-teal-500)"
                         width="48px"
                         height="48px"
                         viewBox="0 0 8 8"
@@ -144,7 +146,7 @@ export function DoctorsMap() {
                         />
                       </svg>
                       {doctorId === doctor.id && (
-                        <div className="relative">
+                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2">
                           <div className="aspect-square w-2 rounded-full bg-teal-500"></div>
                           <div className="absolute top-1/2 left-1/2 aspect-square w-12 -translate-1/2 rounded-full border border-teal-500 bg-teal-500/30"></div>
                         </div>
@@ -171,7 +173,7 @@ export function DoctorsMap() {
       </div>
       <div
         onClick={() => setIsSmallMapOpen((prev) => !prev)}
-        className="fixed bottom-8 left-1/2 z-100 h-14 w-14 -translate-x-1/2 rounded-[30px] border-2 border-gray-200 bg-teal-500 md:hidden"
+        className="fixed bottom-8 left-1/2 z-100 h-14 w-14 -translate-x-1/2 rounded-[30px] bg-teal-500 shadow-[0px_2px_3px_1px_rgba(0,0,0,0.4)] md:hidden"
       >
         <MapPinned
           className={cn({
@@ -217,8 +219,9 @@ export function DoctorsMap() {
                     key={doctor.id + 'marker'}
                     position={{ lat: doctor.hospital.lat, lng: doctor.hospital.long }}
                     zIndex={doctorId === doctor.id ? 100 : 0}
+                    onClick={() => setDoctorId(doctor.id)}
                   >
-                    <div className="relative z-0 flex cursor-pointer flex-col items-center gap-1">
+                    <div className="relative z-0 cursor-pointer">
                       <svg
                         fill="var(--color-teal-600)"
                         width="48px"
@@ -233,7 +236,7 @@ export function DoctorsMap() {
                         />
                       </svg>
                       {doctorId === doctor.id && (
-                        <div className="relative">
+                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2">
                           <div className="aspect-square w-2 rounded-full bg-teal-500"></div>
                           <div className="absolute top-1/2 left-1/2 aspect-square w-12 -translate-1/2 rounded-full border border-teal-500 bg-teal-500/30"></div>
                         </div>
