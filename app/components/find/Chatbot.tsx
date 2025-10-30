@@ -159,8 +159,8 @@ export function Chatbot() {
             loop
             autoplay
             style={{
-              width: '100%',
-              height: '100%',
+              width: '64px',
+              height: '64px',
               objectFit: 'contain',
             }}
           />
