@@ -26,11 +26,15 @@ export async function action({ request }: Route.ClientActionArgs) {
         `https://hzq2fc96.rpcl.app/webhook/733ba71e-4d8c-44b7-bbab-085d3d128af5?token=fuad&text=${encodeURIComponent(text)}`
       );
       const data = await resp.json();
-      return data;
+      const doctors = data.slice(1);
+
+      return { success: true, doctors, aiTextResponse: data[0] };
     } catch (e) {
       console.error('fetch getmedi');
     }
   }
+
+  return { success: false };
 }
 
 export default function FindPage() {
@@ -41,10 +45,11 @@ export default function FindPage() {
     loading = true;
   }
 
+  console.log(fetcher.data);
   return (
     <div className="container py-10 pb-40">
-      <Chatbot />
-      <DoctorsContext value={{ data: fetcher.data ?? [], loading }}>
+      <DoctorsContext value={{ data: fetcher.data?.doctors ?? [], loading }}>
+        <Chatbot />
         <Doctors />
       </DoctorsContext>
     </div>

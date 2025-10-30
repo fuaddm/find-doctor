@@ -1,4 +1,13 @@
-import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from 'react-router';
+import {
+  isRouteErrorResponse,
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useLoaderData,
+  type LoaderFunctionArgs,
+} from 'react-router';
 import { NuqsAdapter } from 'nuqs/adapters/react-router/v7';
 
 import type { Route } from './+types/root';
@@ -6,6 +15,7 @@ import './app.css';
 import { Header } from '~/components/Header';
 import { Footer } from '~/components/Footer';
 import { Toaster } from '~/components/ui/sonner';
+import { jwt } from '~/cookies.server';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -24,6 +34,22 @@ export const links: Route.LinksFunction = () => [
     href: '/logo.svg',
   },
 ];
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  const cookieHeader = request.headers.get('Cookie');
+  const cookie = (await jwt.parse(cookieHeader)) || {};
+  const jwtToken = cookie?.jwt;
+
+  if (jwtToken) {
+    const resp = await fetch('https://sublime-cactus-e01a5ec7f1.strapiapp.com/api/users/me', {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    });
+    const data = await resp.json();
+    // context.set(authContext, data);
+  }
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
